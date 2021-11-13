@@ -1,11 +1,13 @@
 {
-  "name": "wechat-app-mall",
+  "name": "scanner",
   "version": "8.4.0",
-  "description": "删除 <float-menu />",
+  "description": "",
   "main": "app.js",
   "dependencies": {
-    "@vant/weapp": "^1.6.8",
+    "@vant/weapp": "^1.9.2",
     "apifm-wxapi": "^3.36.0",
+    "cropperjs": "^1.5.12",
+    "miniprogram-canvas-sugarjs": "^1.0.4",
     "wxa-plugin-canvas": "^1.1.12",
     "wxbarcode": "^1.0.2"
   },
@@ -15,17 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EastWorld/wechat-app-mall.git"
+    "url": ""
   },
-  "keywords": [
-    "微店",
-    "小店",
-    "微商城"
-  ],
-  "author": "gooking",
+  "keywords": [],
+  "author": "Daoxing.Huang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/EastWorld/wechat-app-mall/issues"
+    "url": "https://github.com/DaoxingHuang/scanner/issues"
   },
-  "homepage": "https://github.com/EastWorld/wechat-app-mall#readme"
+  "homepage": "https://github.com/DaoxingHuang/scanner/#readme"
 }

@@ -1,7 +1,6 @@
 const WXAPI = require('apifm-wxapi')
 const TOOLS = require('../../utils/tools.js')
 const AUTH = require('../../utils/auth')
-
 const APP = getApp()
 
 Page({
@@ -20,9 +19,33 @@ Page({
     coupons: [],
     curPage: 1,
     pageSize: 20,
-    cateScrollTop: 0
+    cateScrollTop: 0,
+    imageURL:"https://img01.yzcdn.cn/vant/ipad.jpeg",
   },
 
+  scannerClick:function(e){
+    console.log(123,e); 
+  },
+
+  chooseImage:function(e){
+    const ctx = wx.createCanvasContext('myCanvas')
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        // "pages/cropper/cropper"
+        wx.redirectTo({
+          url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
+        })
+        // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
+        // ctx.draw();
+        // wx.redirectTo({
+        //   url: '/pages/goods/list?name=' + keywords,
+        // })
+        console.log(res);
+      }
+    });
+  },
   tabClick: function(e) {
     const category = this.data.categories.find(ele => {
       return ele.id == e.currentTarget.dataset.id

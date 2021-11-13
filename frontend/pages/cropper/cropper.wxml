@@ -1,0 +1,22 @@
+<!--pages/cropper/cropper.wxml-->
+<view>
+  <canvas
+  type="2d"
+  id="canvas"
+  style="width: 300px; height: 300px;"
+></canvas>
+<view slot="footer">
+    <van-button bind:click="nineLeft" size="mini">按钮</van-button>
+    <van-button bind:click="nineReft"  size="mini">按钮</van-button>
+  </view>
+  <!-- <canvas type="2d" id="myCanvas"></canvas> -->
+  <!-- <view type="2d" id="myCanvas"></view> -->
+
+  <!-- <van-image
+  width="300"
+  height="300"
+  src="{{url}}"
+/> -->
+</view>
+
+

@@ -1,6 +1,10 @@
 const WXAPI = require('apifm-wxapi')
 const CONFIG = require('config.js')
-const AUTH = require('utils/auth')
+const AUTH = require('utils/auth');
+// 打开调试
+wx.setEnableDebug({
+  enableDebug: true
+})
 App({
   onLaunch: function() {
     const subDomain = wx.getExtConfigSync().subDomain

@@ -1,5 +1,5 @@
 {
-  "pages": [    
+  "pages": [
     "pages/start/start",
     "pages/shop/select",
     "pages/index/index",
@@ -53,7 +53,9 @@
     "pages/recycle/index",
     "pages/recycle/orders",
     "pages/recycle/order-detail",
-    "pages/card/logs"
+    "pages/card/logs",
+    "pages/home/index",
+    "pages/cropper/cropper"
   ],
   "subpackages": [
     {
@@ -100,6 +102,7 @@
     "onReachBottomDistance": 50
   },
   "tabBar": {
+    "custom": true,
     "color": "#6e6d6b",
     "selectedColor": "#e64340",
     "borderStyle": "white",
@@ -109,7 +112,7 @@
         "pagePath": "pages/index/index",
         "iconPath": "images/nav/home-off.png",
         "selectedIconPath": "images/nav/home-on.png",
-        "text": "首页"
+        "text": "1页11"
       },
       {
         "pagePath": "pages/category/category",
@@ -127,7 +130,7 @@
         "pagePath": "pages/shop-cart/index",
         "iconPath": "images/nav/cart-off.png",
         "selectedIconPath": "images/nav/cart-on.png",
-        "text": "购物车"
+        "text": "App"
       },
       {
         "pagePath": "pages/my/index",
@@ -144,7 +147,7 @@
   },
   "usingComponents": {
     "float-menu": "/components/float-menu/index",
-    "parser":"/components/parser.20200414.min/parser",
+    "parser": "/components/parser.20200414.min/parser",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
     "van-search": "@vant/weapp/search/index",
     "van-divider": "@vant/weapp/divider/index",
@@ -183,7 +186,9 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-area": "@vant/weapp/area/index"
+    "van-area": "@vant/weapp/area/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index"
   },
   "sitemapLocation": "sitemap.json"
 }
