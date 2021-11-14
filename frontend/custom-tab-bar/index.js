@@ -53,8 +53,9 @@ Component({
   },
   methods: {
     switchTab(e) {
-      const idx = e.currentTarget.dataset.index
-      const path = e.currentTarget.dataset.path
+      console.log(e.currentTarget.dataset);
+      const idx = e.currentTarget.dataset.index;
+      const path = e.currentTarget.dataset.path;
       this.setData({
         selected: idx
       })

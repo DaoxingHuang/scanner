@@ -7,14 +7,6 @@ wx.setEnableDebug({
 })
 App({
   onLaunch: function() {
-    const subDomain = wx.getExtConfigSync().subDomain
-    if (subDomain) {
-      WXAPI.init(subDomain)
-    } else {
-      WXAPI.init(CONFIG.subDomain)
-      WXAPI.setMerchantId(CONFIG.merchantId)
-    }
-    
     const that = this;
     // 检测新版本
     const updateManager = wx.getUpdateManager()
@@ -64,16 +56,7 @@ App({
         wx.hideToast()
       }
     })
-    WXAPI.queryConfigBatch('mallName,WITHDRAW_MIN,ALLOW_SELF_COLLECTION,order_hx_uids,subscribe_ids,share_profile,adminUserIds,goodsDetailSkuShowType,shopMod,needIdCheck,balance_pay_pwd,shipping_address_gps,shipping_address_region_level,shopping_cart_vop_open,cps_open,recycle_open,categoryMod,hide_reputation,show_seller_number,show_goods_echarts,show_buy_dynamic,goods_search_show_type,show_3_seller,show_quan_exchange_score,show_score_exchange_growth,show_score_sign,fx_subscribe_ids,share_pic,orderPeriod_open,order_pay_user_balance,wxpay_api_url').then(res => {
-      if (res.code == 0) {
-        res.data.forEach(config => {
-          wx.setStorageSync(config.key, config.value);
-        })
-        if (this.configLoadOK) {
-          this.configLoadOK()
-        }
-      }
-    })
+  
     // ---------------检测navbar高度
     let menuButtonObject = wx.getMenuButtonBoundingClientRect();
     console.log("小程序胶囊信息",menuButtonObject)
@@ -94,49 +77,8 @@ App({
     })
   },
 
-  onShow (e) {
-    // 保存邀请人
-    if (e && e.query && e.query.inviter_id) {
-      wx.setStorageSync('referrer', e.query.inviter_id)
-      if (e.shareTicket) {
-        wx.getShareInfo({
-          shareTicket: e.shareTicket,
-          success: res => {
-            wx.login({
-              success(loginRes) {
-                if (loginRes.code) {
-                  WXAPI.shareGroupGetScore(
-                    loginRes.code,
-                    e.query.inviter_id,
-                    res.encryptedData,
-                    res.iv
-                  ).then(_res => {
-                    console.log(_res)
-                  }).catch(err => {
-                    console.error(err)
-                  })
-                } else {
-                  console.error('登录失败！' + loginRes.errMsg)
-                }
-              }
-            })
-          }
-        })
-      }
-    }
-    // 自动登录
-    AUTH.checkHasLogined().then(isLogined => {
-      if (!isLogined) {
-        AUTH.authorize().then( aaa => {
-          AUTH.bindSeller()
-        })
-      } else {
-        AUTH.bindSeller()
-      }
-    })
-  },
   globalData: {
     isConnected: true,
-    sdkAppID: CONFIG.sdkAppID
+    // sdkAppID: CONFIG.sdkAppID
   }
 })

@@ -5,43 +5,63 @@ const APP = getApp()
 
 Page({
   data: {
-    inputVal: "", // 搜索框内容
-    goodsRecommend: [], // 推荐商品
-    kanjiaList: [], //砍价商品列表
-    pingtuanList: [], //拼团商品列表
-    loadingHidden: false, // loading
-    selectCurrent: 0,
-    categories: [],
-    activeCategoryId: 0,
-    goods: [],
-    scrollTop: 0,
-    loadingMoreHidden: true,
-    coupons: [],
-    curPage: 1,
-    pageSize: 20,
-    cateScrollTop: 0,
-    imageURL:"https://img01.yzcdn.cn/vant/ipad.jpeg",
+    showFileSelect:false,
+    selectActions: [
+      { name: '拍照',type:"device",sizeType:['original', 'compressed'],sourceType:['camera']},
+      { name: '从相册中选择',type:"device", sizeType:['original', 'compressed'],sourceType:['album']},
+      { name: '导入联系人图片',type:"message"},
+    ],
   },
 
-  scannerClick:function(e){
-    console.log(123,e); 
+  showFileSelectPopup(){
+    console.log("showFileSelectPopup:",this.data.showFileSelect)
+    this.setData({showFileSelect:true});
   },
 
-  chooseImage:function(e){
-    const ctx = wx.createCanvasContext('myCanvas')
+  closeFileSelect(){
+    console.log("closeFileSelect:",this.data.showFileSelect)
+    this.setData({showFileSelect:false});
+  },
+
+  selectFileAction:function(event){
+    const detail=  event.detail;
+    // sizeType=['original', 'compressed'],sourceType=['camera']
+    // const action = detail.action();
+
+    detail.type === "device" && this.chooseImage(detail.sizeType, detail.sourceType);
+    detail.type === "message" && this.chooseMessageFile(detail.sizeType, detail.sourceType);
+
+    console.log("selectFileAction:",detail);
+
+  },
+   
+  chooseMessageFile:function(e){
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'image',
+      success (res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFiles
+      }
+    })
+  },
+
+  chooseImage:function(sizeType=['original', 'compressed'],sourceType=['album', 'camera']){
     wx.chooseImage({
-      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
-      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      count: 1,
+      sizeType,  //可选择原图或压缩后的图片
+      sourceType, //可选择性开放访问相册、相机
       success: res => {
+
         // "pages/cropper/cropper"
-        wx.redirectTo({
-          url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
-        })
-        // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
-        // ctx.draw();
         // wx.redirectTo({
-        //   url: '/pages/goods/list?name=' + keywords,
+        //   url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
         // })
+        // // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
+        // // ctx.draw();
+        // // wx.redirectTo({
+        // //   url: '/pages/goods/list?name=' + keywords,
+        // // })
         console.log(res);
       }
     });
@@ -61,6 +81,7 @@ Page({
       })
     }
   },
+
   toDetailsTap: function(e) {
     console.log(e);
     const id = e.currentTarget.dataset.id
@@ -110,6 +131,7 @@ Page({
     })
   },
   onLoad: function(e) {
+    console.log("index-onLoad:",e)
     wx.showShareMenu({
       withShareTicket: true,
     })
@@ -137,28 +159,20 @@ Page({
         TOOLS.showTabBarBadge()
       }
     })
-    this.initBanners()
-    this.categories()
-    WXAPI.goods({
-      recommendStatus: 1
-    }).then(res => {
-      if (res.code === 0){
-        that.setData({
-          goodsRecommend: res.data
-        })
-      }      
-    })
-    that.getCoupons()
-    that.getNotice()
-    that.kanjiaGoods()
-    that.pingtuanGoods()
-    this.wxaMpLiveRooms()
-    this.adPosition()
-    // 读取系统参数
-    this.readConfigVal()
-    getApp().configLoadOK = () => {
-      this.readConfigVal()
-    }
+    // this.initBanners()
+    // this.categories()
+
+    // that.getCoupons()
+    // that.getNotice()
+    // that.kanjiaGoods()
+    // that.pingtuanGoods()
+    // this.wxaMpLiveRooms()
+    // this.adPosition()
+    // // 读取系统参数
+    // this.readConfigVal()
+    // getApp().configLoadOK = () => {
+    //   this.readConfigVal()
+    // }
   },
   readConfigVal() {
     wx.setNavigationBarTitle({
@@ -255,178 +269,5 @@ Page({
     });
     this.getGoodsList(0);
   },
-  onPageScroll(e) {
-    let scrollTop = this.data.scrollTop
-    this.setData({
-      scrollTop: e.scrollTop
-    })
-  },
-  async getGoodsList(categoryId, append) {
-    if (categoryId == 0) {
-      categoryId = "";
-    }
-    wx.showLoading({
-      "mask": true
-    })
-    const res = await WXAPI.goods({
-      categoryId: categoryId,
-      page: this.data.curPage,
-      pageSize: this.data.pageSize
-    })
-    wx.hideLoading()
-    if (res.code == 404 || res.code == 700) {
-      let newData = {
-        loadingMoreHidden: false
-      }
-      if (!append) {
-        newData.goods = []
-      }
-      this.setData(newData);
-      return
-    }
-    let goods = [];
-    if (append) {
-      goods = this.data.goods
-    }
-    for (var i = 0; i < res.data.length; i++) {
-      goods.push(res.data[i]);
-    }
-    this.setData({
-      loadingMoreHidden: true,
-      goods: goods,
-    });
-  },
-  getCoupons: function() {
-    var that = this;
-    WXAPI.coupons().then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          coupons: res.data
-        });
-      }
-    })
-  },
-  onShareAppMessage: function() {    
-    return {
-      title: '"' + wx.getStorageSync('mallName') + '" ' + wx.getStorageSync('share_profile'),
-      path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
-    }
-  },
-  getNotice: function() {
-    var that = this;
-    WXAPI.noticeList({pageSize: 5}).then(function (res) {
-      if (res.code == 0) {
-        that.setData({
-          noticeList: res.data
-        });
-      }
-    })
-  },
-  onReachBottom: function() {
-    this.setData({
-      curPage: this.data.curPage + 1
-    });
-    this.getGoodsList(this.data.activeCategoryId, true)
-  },
-  onPullDownRefresh: function() {
-    this.setData({
-      curPage: 1
-    });
-    this.getGoodsList(this.data.activeCategoryId)
-    wx.stopPullDownRefresh()
-  },
-  // 获取砍价商品
-  async kanjiaGoods(){
-    const res = await WXAPI.goods({
-      kanjia: true
-    });
-    if (res.code == 0) {
-      const kanjiaGoodsIds = []
-      res.data.forEach(ele => {
-        kanjiaGoodsIds.push(ele.id)
-      })
-      const goodsKanjiaSetRes = await WXAPI.kanjiaSet(kanjiaGoodsIds.join())
-      if (goodsKanjiaSetRes.code == 0) {
-        res.data.forEach(ele => {
-          const _process = goodsKanjiaSetRes.data.find(_set => {
-            return _set.goodsId == ele.id
-          })
-          if (_process) {
-            ele.process = 100 * _process.numberBuy / _process.number
-            ele.process = ele.process.toFixed(0)
-          }
-        })
-        this.setData({
-          kanjiaList: res.data
-        })
-      }
-    }
-  },
-  goCoupons: function (e) {
-    wx.switchTab({
-      url: "/pages/coupons/index"
-    })
-  },
-  pingtuanGoods(){ // 获取团购商品列表
-    const _this = this
-    WXAPI.goods({
-      pingtuan: true
-    }).then(res => {
-      if (res.code === 0) {
-        _this.setData({
-          pingtuanList: res.data
-        })
-      }
-    })
-  },
-  goSearch(){
-    wx.navigateTo({
-      url: '/pages/search/index'
-    })
-  },
-  goNotice(e) {
-    const id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '/pages/notice/show?id=' + id,
-    })
-  },
-  async adPosition() {
-    let res = await WXAPI.adPosition('indexPop')
-    if (res.code == 0) {
-      this.setData({
-        adPositionIndexPop: res.data
-      })
-    }
-    res = await WXAPI.adPosition('index-live-pic')
-    if (res.code == 0) {
-      this.setData({
-        adPositionIndexLivePic: res.data
-      })
-    }
-  },
-  clickAdPositionIndexLive() {
-    if (!this.data.adPositionIndexLivePic || !this.data.adPositionIndexLivePic.url) {
-      return
-    }
-    wx.navigateTo({
-      url: this.data.adPositionIndexLivePic.url,
-    })
-  },
-  closeAdPositionIndexPop() {
-    this.setData({
-      adPositionIndexPop: null
-    })
-  },
-  clickAdPositionIndexPop() {
-    const adPositionIndexPop = this.data.adPositionIndexPop
-    this.setData({
-      adPositionIndexPop: null
-    })
-    if (!adPositionIndexPop || !adPositionIndexPop.url) {
-      return
-    }
-    wx.navigateTo({
-      url: adPositionIndexPop.url,
-    })
-  }
+
 })

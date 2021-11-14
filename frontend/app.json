@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/start/start",
     "pages/shop/select",
-    "pages/index/index",
     "pages/notice/index",
     "pages/notice/show",
     "pages/category/category",
@@ -188,7 +188,9 @@
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
     "van-area": "@vant/weapp/area/index",
     "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index"
+    "van-col": "@vant/weapp/col/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+
   },
   "sitemapLocation": "sitemap.json"
 }

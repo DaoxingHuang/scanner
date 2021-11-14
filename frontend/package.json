@@ -1,13 +1,12 @@
 {
   "name": "scanner",
   "version": "8.4.0",
-  "description": "",
+  "description": "智能扫描全覆盖，全球领先的智能扫码工具",
   "main": "app.js",
   "dependencies": {
     "@vant/weapp": "^1.9.2",
     "apifm-wxapi": "^3.36.0",
     "cropperjs": "^1.5.12",
-    "miniprogram-canvas-sugarjs": "^1.0.4",
     "wxa-plugin-canvas": "^1.1.12",
     "wxbarcode": "^1.0.2"
   },

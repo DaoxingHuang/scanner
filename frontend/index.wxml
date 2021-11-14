@@ -59,10 +59,6 @@
   show="{{ showFileSelect }}"
   actions="{{ selectActions }}"
   cancel-text="取消"
-  z-index="9999999"
-  bind:select="selectFileAction"
-  bind:close="closeFileSelect"
-  bind:cancel="closeFileSelect"
 />
 </view>
 

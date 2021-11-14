@@ -1,10 +1,8 @@
 <view class="tab-bar">
-  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
-    <view class="center_part" wx:if="{{item.iconPath}}">
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-item="{{item}}" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
       <!-- <image class="center_img center-has-noimg" src="../images/nav/my-on.png"></image> -->
       <image class="center_img center-has-image {{item.text?'':'img-no-text'}}" 
         src="{{selected === index?item.selectedIconPath:item.iconPath}}"></image>
-    </view>
     <view class="txt" wx:if="{{selected === index}}" style="color: {{selected === index ?selectedColor : color}}">
       {{item.text}}
       <view class="bg_rec"></view>
