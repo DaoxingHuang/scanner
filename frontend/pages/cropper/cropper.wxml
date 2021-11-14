@@ -1,22 +1,20 @@
 <!--pages/cropper/cropper.wxml-->
-<view>
-  <canvas
-  type="2d"
-  id="canvas"
-  style="width: 300px; height: 300px;"
-></canvas>
-<view slot="footer">
+<view class="cropper-container">
+    <image-cropper id="image-cropper" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut">
+    </image-cropper>
+<view class="footer">
+  <scroll-view scroll-with-animation="true" class="scroll-view_H" scroll-x="true" bindscroll="scroll">
+      <view id="demo1" wx:for="{{compressImgs}}" wx:key="id" class="scroll-view-item_H demo-text-1">
+            <image  class="scroll-view_H-img" mode="aspectFill" bindtap="imgClick" src="{{item.url}}"/>
+     </view>
+ </scroll-view>
+  <view slot="footer" class="">
     <van-button bind:click="nineLeft" size="mini">按钮</van-button>
     <van-button bind:click="nineReft"  size="mini">按钮</van-button>
   </view>
-  <!-- <canvas type="2d" id="myCanvas"></canvas> -->
-  <!-- <view type="2d" id="myCanvas"></view> -->
 
-  <!-- <van-image
-  width="300"
-  height="300"
-  src="{{url}}"
-/> -->
+</view>
+
 </view>
 
 

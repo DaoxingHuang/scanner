@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "sugar":"miniprogram-canvas-sugarjs"
-  }
+    "image-cropper": "../../components/image-cropper/image-cropper"
+}
 }

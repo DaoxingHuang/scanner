@@ -14,6 +14,7 @@ Page({
   data: {
     url:'',
     ctx:null,
+    compressImgs:[]
   },
 
   /**
@@ -22,13 +23,19 @@ Page({
   onLoad: function (options) {
     // const ctx = wx.createCanvas()
     this.setData({url:options.url});
-    this.position = {
-      x: 150,
-      y: 150,
-      vx: 2,
-      vy: 2
+    this.initCompressImgs(options.url);
+    this.cropper = this.selectComponent("#image-cropper");
+    this.setData({
+        src: options.url
+    });
+  },
+
+  initCompressImgs:function(url){
+    const ret = [];
+    for(let i =0;i<6;i++){
+      ret.push({id:i,url:url})
     }
-    this.x = -100;
+    this.setData({compressImgs:ret});
   },
 
   /**
@@ -44,72 +51,7 @@ Page({
     })
     .exec(this.init.bind(this))
   },
-
-  
-
   init(res) {
-    const canvas = res[0].node
-    console.log(sugar)
-    const sugarCanvas = new sugar.Canvas({
-      canvas: canvas,
-      width: 300,
-      height:300,
-      backgroundColor: 'skyblue'
-    });
-    sugarCanvas.Image.fromURL(this.data.url, (img) => {
-      img.set({
-        scaleX: 0.5,
-        scaleY: 0.5,
-        left: 0,
-        top: 0
-      })
-      sugarCanvas.add(img).setActiveObject(img)
-    })
-    return ;
-//     console.log(res,this.data.url);
-//     const width = res[0].width
-//     const height = res[0].height
-  
-//     const canvas = res[0].node
-//     const ctx = canvas.getContext('2d')
-//     ctx.translate(150,150);
-
-//     this.setData({ctx,canvas});
-// //     console.log('draw:',ctx.draw);
-// //     ctx.moveTo(10, 10)
-// // ctx.lineTo(100, 10)
-// // ctx.lineTo(100, 100)
-// // ctx.stroke()
-// // ctx.draw()
-//     const dpr = wx.getSystemInfoSync().pixelRatio
-//     canvas.width = width * dpr
-//     canvas.height = height * dpr
-//     ctx.scale(dpr, dpr);
-//     // ctx.rotate(20 * Math.PI / 180);
-//     console.log("width * dpr",width * dpr," height * dpr",height * dpr)
-//     // const renderLoop = () => {
-//     //   this.render(canvas, ctx)
-//     //   canvas.requestAnimationFrame(renderLoop)
-//     // }
-//     // canvas.requestAnimationFrame(renderLoop)
-//     // ctx.translate(150,150);
-//     // ctx.rotate(45 * Math.PI / 180);
-//     const img = canvas.createImage()
-//     img.onload = () => {
-//       console.log(567);
-//       ctx.drawImage(img, 0, 0, 300, 300);
-//     }
-//     img.src = this.data.url;
-    // console.log("ctx:", ctx.drawImage);
-    // wx.downloadFile({
-    //     url: this.data.url,
-    //     success:(res) => {
-    //       console("", res.tempFilePath)
-    //       ctx.drawImage(this.data.url, 0, 0, 300, 300);
-    //   }
-    // });
-    // ctx.draw();
-    // this.render(canvas, ctx);
   },
 
   nineLeft(){

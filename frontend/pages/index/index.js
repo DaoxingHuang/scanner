@@ -54,9 +54,9 @@ Page({
       success: res => {
 
         // "pages/cropper/cropper"
-        // wx.redirectTo({
-        //   url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
-        // })
+        wx.redirectTo({
+          url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
+        })
         // // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
         // // ctx.draw();
         // // wx.redirectTo({
