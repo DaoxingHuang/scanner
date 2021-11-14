@@ -11,6 +11,7 @@
 .scroll-view_H{
   white-space: nowrap;
   width: 100%;
+  /* padding: 0 20rpx; */
 }
 .scroll-view-item {
   height:180rpx;
@@ -18,8 +19,13 @@
 }
 .scroll-view-item_H{
   display: inline-block;
-  width:  140rpx;
-  height:140rpx;
+  text-align: center;
+  width:  120rpx;
+  height:120rpx;
+  margin-left: 30rpx;
+}
+.scroll-view-item_H:last-child{
+  margin-right: 30rpx;
 }
 
 .scroll-view_H-img{
@@ -27,9 +33,110 @@
   height: 120rpx;
 }
 
+.scroll-view_H-txt{
+  color: white;
+  font-size: 20rpx;
+  width: 120rpx;
+  line-height: 30rpx;
+  background: rgba(0, 0, 0, 0.45);
+  margin-top: -30rpx;
+  position: absolute;
+  text-align: center;
+}
+
+
 .footer{
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 100;
+}
+.filter-none{
+  position: relative;
+  -webkit-filter: "none";
+  filter: "none";
+}
+
+.filter-inkwell {
+  position: relative;
+  -webkit-filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+  filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+}
+.filter-inkwell::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+}
+
+.filter-amaro {
+  position: relative;
+  -webkit-filter: contrast(90%) brightness(110%) saturate(150%) hue-rotate(-10deg);
+  filter: contrast(90%) brightness(110%) saturate(150%) hue-rotate(-10deg);
+}
+
+.filter-aden {
+  position: relative;
+  -webkit-filter: contrast(90%) brightness(120%) saturate(85%) hue-rotate(20deg);
+  filter: contrast(90%) brightness(120%) saturate(85%) hue-rotate(20deg);
+}
+.filter-aden::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: darken;
+  background: -webkit-linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(66, 10, 14, 0));
+  background: linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(66, 10, 14, 0));
+}
+
+.filter-maven {
+  position: relative;
+  -webkit-filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%);
+  filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%);
+}
+.filter-maven::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: hue;
+  /* background: rgba(3, 230, 26, 0.2); */
+}
+
+.filter-shengMo {
+  position: relative;
+  -webkit-filter: contrast(72%) brightness(88%) saturate(28%) sepia(37%) grayscale(100%) invert(100%) hue-rotate(83deg);
+  filter: contrast(72%) brightness(88%) saturate(28%) sepia(37%) grayscale(100%) invert(100%) hue-rotate(83deg);
+}
+.footer-img-constainer{
+  background:rgba(255, 255, 255, 0.7);
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20rpx;
+  padding:10rpx;
+}
+.footer-img{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.footer-txt{
+  font-size: 30rpx;
+  color: #fff;
 }

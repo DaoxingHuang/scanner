@@ -1,11 +1,4 @@
-// pages/cropper/cropper.js
-
-// const fabric = require('../../utils/fabric.min.js');
-// const sugar = require('miniprogram-canvas-sugarjs/src/sugarjs');
-
-// import  sugar from 'miniprogram-canvas-sugarjs/.js';
-
-// console.log("sugar:",sugar);
+import {imgFilter} from '../../utils/constants';
 Page({
 
   /**
@@ -14,7 +7,8 @@ Page({
   data: {
     url:'',
     ctx:null,
-    compressImgs:[]
+    compressImgs:[],
+    filter:''
   },
 
   /**
@@ -32,11 +26,50 @@ Page({
 
   initCompressImgs:function(url){
     const ret = [];
-    for(let i =0;i<6;i++){
-      ret.push({id:i,url:url})
+    for(let i =0;i<imgFilter.length;i++){
+      const item = imgFilter[i];
+      ret.push(Object.assign({},item,{url:url}))
     }
     this.setData({compressImgs:ret});
   },
+
+  addFilter:function(e){
+    console.log(e.currentTarget.dataset.filter);
+    this.setData({filter:e.currentTarget.dataset.filter})
+  },
+
+  rotate(angle=90) {
+    //在用户旋转的基础上旋转90°
+    this.cropper.setAngle(this.cropper.data.angle += angle);
+ },
+
+ rotateLeft() {
+  this.rotate(-90);
+},
+
+rotateRight() {
+  this.rotate(90);
+},
+
+narrow() {
+  this.data.narrow = setInterval(() => {
+      this.cropper.setTransform({
+          scale: -0.02
+      });
+  }, 1000 / 60)
+},
+enlarge() {
+  this.data.enlarge = setInterval(() => {
+      this.cropper.setTransform({
+          scale: 0.02
+      });
+  }, 1000 / 60)
+},
+
+
+ end(e) {
+  clearInterval(this.data[e.currentTarget.dataset.type]);
+},
 
   /**
    * Lifecycle function--Called when page is initially rendered

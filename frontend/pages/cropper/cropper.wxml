@@ -1,16 +1,37 @@
 <!--pages/cropper/cropper.wxml-->
 <view class="cropper-container">
-    <image-cropper id="image-cropper" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut">
+    <image-cropper id="image-cropper" filter="{{filter}}" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut">
     </image-cropper>
 <view class="footer">
-  <scroll-view scroll-with-animation="true" class="scroll-view_H" scroll-x="true" bindscroll="scroll">
-      <view id="demo1" wx:for="{{compressImgs}}" wx:key="id" class="scroll-view-item_H demo-text-1">
-            <image  class="scroll-view_H-img" mode="aspectFill" bindtap="imgClick" src="{{item.url}}"/>
+  <scroll-view scroll-with-animation="true" class="scroll-view_H" scroll-x="true" >
+      <view id="demo1" wx:for="{{compressImgs}}"  bindtap="addFilter" wx:key="id" class="scroll-view-item_H demo-text-1" data-filter="{{item.class}}">
+            <image  class="scroll-view_H-img {{item.class}}" mode="aspectFill" bindtap="imgClick" src="{{item.url}}"/>
+            <view class="scroll-view_H-txt">{{item.name}}</view>
      </view>
  </scroll-view>
-  <view slot="footer" class="">
-    <van-button bind:click="nineLeft" size="mini">按钮</van-button>
-    <van-button bind:click="nineReft"  size="mini">按钮</van-button>
+  <view  class="footer-img-constainer">
+    <view bindtap="()=>{}">
+      <!-- <button class="button" catchtouchstart='enlarge' catchtouchend='end' data-type="enlarge">放大</button>
+    <button class="button" catchtouchstart='narrow' catchtouchend='end' data-type="narrow">缩小</button> -->
+    <image class="footer-img" catchtouchstart='enlarge' catchtouchend='end' data-type="enlarge" src="/../../images/icon/zoom_in.svg"></image>
+    <!-- <view class="footer-txt">逆时针90度</view> -->
+  </view>
+  <view>
+    <image class="footer-img" src="/../../images/icon/zoom_out.svg" catchtouchstart='narrow' catchtouchend='end' data-type="narrow"></image>
+    <!-- <view class="footer-txt">顺时针90度</view> -->
+  </view>
+  <view>
+    <image class="footer-img"  catchtouchstart='rotateLeft' catchtouchend='end' data-type="rotate" src="/../../images/icon/left90.svg"></image>
+    <!-- <view class="footer-txt">逆时针90度</view> -->
+  </view>
+  <view>
+    <image class="footer-img"  catchtouchstart='rotateRight' catchtouchend='end' data-type="rotate" src="/../../images/icon/right90.svg"></image>
+    <!-- <view class="footer-txt">顺时针90度</view> -->
+  </view>
+
+  <view>
+    <van-button size="small" type="primary">保存</van-button>
+  </view>
   </view>
 
 </view>

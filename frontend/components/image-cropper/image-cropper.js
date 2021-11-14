@@ -151,6 +151,14 @@ Component({
         'limit_move': {
             type: Boolean,
             value: false
+        },
+        'filter':{
+            type: null,
+            value:null,
+            observer: function(newVal, oldVal) {
+                this.setData({p_filter:newVal});
+                // console.log('properties-filter', newVal)
+            }
         }
     },
     data: {
@@ -178,6 +186,7 @@ Component({
         _cut_animation: false, //是否开启图片和裁剪框过渡
         _img_top: wx.getSystemInfoSync().windowHeight / 2.5, //图片上边距
         _img_left: wx.getSystemInfoSync().windowWidth / 2, //图片左边距
+        p_filter:null,
         watch: {
             //监听截取框宽高变化
             width(value, that) {
@@ -250,7 +259,8 @@ Component({
                     if (that.data.limit_move) {
                         !that.data._canvas_overflow && that._draw();
                     }
-                }
+                },
+    
         }
     },
     attached() {
@@ -352,6 +362,7 @@ Component({
                     this.data.watch.cut_left(null, this);
                 }
                 if (transform.cutY) {
+                    debugger;
                     this.setData({
                         cut_top: cutY + transform.cutY
                     });
@@ -376,6 +387,8 @@ Component({
              * 设置剪裁框位置
              */
             setCutXY(x, y) {
+                debugger;
+
                 this.setData({
                     cut_top: y,
                     cut_left: x
@@ -395,8 +408,9 @@ Component({
              * 设置剪裁框和图片居中
              */
             setCutCenter() {
-                let cut_top = (this.data.info.windowHeight - this.data.height) * 0.5;
-            
+                let cut_top = (this.data.info.windowHeight - this.data.height) * 0.3;
+                debugger;
+
                 let cut_left = (this.data.info.windowWidth - this.data.width) * 0.5;
                 console.log("cut_top:",cut_top," cut_left:",cut_left);
                 //顺序不能变
@@ -408,8 +422,10 @@ Component({
                 });
             },
             _setCutCenter() {
-                let cut_top = (this.data.info.windowHeight - this.data.height) * 0.5;
+                let cut_top = (this.data.info.windowHeight - this.data.height) * 0.3;
                 let cut_left = (this.data.info.windowWidth - this.data.width) * 0.5;
+                debugger;
+
                 this.setData({
                     cut_top: cut_top, //截取的框上边距
                     cut_left: cut_left, //截取的框左边距

@@ -26,7 +26,7 @@
 }
 
 .image-cropper .bg_black {
-    background: rgba(0, 0, 0, 0.8) !important;
+    background: rgba(0, 0, 0, 0.6) !important;
 }
 
 .image-cropper .bg_gray {
@@ -141,3 +141,74 @@
     left: -2.5px;
     bottom: -1px;
 }
+.filter-none{
+    position: relative;
+    -webkit-filter: "none";
+    filter: "none";
+  }
+  
+.filter-inkwell {
+    position: relative;
+    -webkit-filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+    filter: contrast(110%) brightness(110%) sepia(30%) grayscale(100%);
+  }
+  .filter-inkwell::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0);
+  }
+  
+  .filter-amaro {
+    position: relative;
+    -webkit-filter: contrast(90%) brightness(110%) saturate(150%) hue-rotate(-10deg);
+    filter: contrast(90%) brightness(110%) saturate(150%) hue-rotate(-10deg);
+  }
+  
+  .filter-aden {
+    position: relative;
+    -webkit-filter: contrast(90%) brightness(120%) saturate(85%) hue-rotate(20deg);
+    filter: contrast(90%) brightness(120%) saturate(85%) hue-rotate(20deg);
+  }
+  .filter-aden::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: darken;
+    background: -webkit-linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(66, 10, 14, 0));
+    background: linear-gradient(to right, rgba(66, 10, 14, 0.2) 1, rgba(66, 10, 14, 0));
+  }
+  
+  .filter-maven {
+    position: relative;
+    -webkit-filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%);
+    filter: contrast(95%) brightness(95%) saturate(150%) sepia(25%);
+  }
+  .filter-maven::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: hue;
+    /* background: rgba(3, 230, 26, 0.2); */
+  }
+  
+  .filter-shengMo {
+    position: relative;
+    -webkit-filter: contrast(72%) brightness(88%) saturate(28%) sepia(37%) grayscale(100%) invert(100%) hue-rotate(83deg);
+    filter: contrast(72%) brightness(88%) saturate(28%) sepia(37%) grayscale(100%) invert(100%) hue-rotate(83deg);
+  }
