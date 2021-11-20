@@ -55,7 +55,8 @@
     "pages/recycle/order-detail",
     "pages/card/logs",
     "pages/home/index",
-    "pages/cropper/cropper"
+    "pages/cropper/cropper",
+    "pages/signature/index"
   ],
   "subpackages": [
     {
@@ -189,8 +190,8 @@
     "van-area": "@vant/weapp/area/index",
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index"
-
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-slider": "@vant/weapp/slider/index"
   },
   "sitemapLocation": "sitemap.json"
 }

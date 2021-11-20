@@ -5,6 +5,7 @@ const AUTH = require('utils/auth');
 wx.setEnableDebug({
   enableDebug: true
 })
+
 App({
   onLaunch: function() {
     const that = this;

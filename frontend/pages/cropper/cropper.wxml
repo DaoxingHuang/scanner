@@ -8,9 +8,9 @@
             <image  class="scroll-view_H-img {{item.class}}" mode="aspectFill" bindtap="imgClick" src="{{item.url}}"/>
             <view class="scroll-view_H-txt">{{item.name}}</view>
      </view>
- </scroll-view>
+  </scroll-view>
   <view  class="footer-img-constainer">
-    <view bindtap="()=>{}">
+    <view>
       <!-- <button class="button" catchtouchstart='enlarge' catchtouchend='end' data-type="enlarge">放大</button>
     <button class="button" catchtouchstart='narrow' catchtouchend='end' data-type="narrow">缩小</button> -->
     <image class="footer-img" catchtouchstart='enlarge' catchtouchend='end' data-type="enlarge" src="/../../images/icon/zoom_in.svg"></image>

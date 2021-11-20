@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="handBtn">
+    <view class="slider-container">
+    <van-slider  min="1" max="5" value="1.5" bind:change="onLineWeightChange"  custom-class="slider-custom-class"  bar-height="4px" active-color="#ee0a24" />
+    </view>
+    <view class="radio-group">
+    <van-radio-group  direction="horizontal" value="{{ '#000000' }}" bind:change="onColorChange">
+      <van-radio wx:for="{{colors}}" custom-class="radio-custom-class"  name="{{item}}"  label-class="label-class-item" wx:key="index"  checked-color="{{item}}"></van-radio>
+      <!-- <van-radio name="2" checked-color="#07c160">单选框 2</van-radio> -->
+    </van-radio-group>
+    </view>
+
+    <view class="buttonGroup">
+      <van-button catchtap="retDraw" size="small" type="default">重写</van-button>
+      <van-button catchtap="subCanvas" class="finish-btn" size="small"  type="primary">完成</van-button>
+    </view>
+
+    <!-- <van-button type="info">信息按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+    <van-button type="danger">危险按钮</van-button> -->
+    <!-- <button catchtap="retDraw" >重写</button>
+    <button catchtap="subCanvas" >完成</button>  -->
+  </view>
+
+  <view class="handCenter">
+    <canvas class="handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove"
+      bindtouchend="uploadScaleEnd" bindtap="mouseDown" id="handWriting" canvas-id="handWriting">
+    </canvas>
+  </view>
+  <view class="handRight">
+    <view class="handTitle">手写板</view>
+  </view>
+
+</view>

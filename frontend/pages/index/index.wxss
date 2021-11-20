@@ -629,11 +629,11 @@
 .main-item-T{
   background:#fa6e5a; 
 }
-.main-item-T:hover{
+/* .main-item-T:hover{
   background:#51ba77; 
   border-radius: 32rpx;
   margin-bottom: 32rpx;
-}
+} */
 
 .main-item-excel{
   background:#51ba77;

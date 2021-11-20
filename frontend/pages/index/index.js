@@ -41,10 +41,14 @@ Page({
       type: 'image',
       success (res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFiles
+        wx.redirectTo({
+          url: '/pages/cropper/cropper?url='+ res.tempFiles[0],
+        });
+        // const tempFilePaths = res.tempFiles
       }
     })
   },
+
 
   chooseImage:function(sizeType=['original', 'compressed'],sourceType=['album', 'camera']){
     wx.chooseImage({
@@ -55,7 +59,7 @@ Page({
 
         // "pages/cropper/cropper"
         wx.redirectTo({
-          url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
+          url: '/pages/signature/index?url='+ res.tempFilePaths[0],
         })
         // // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
         // // ctx.draw();
@@ -66,6 +70,7 @@ Page({
       }
     });
   },
+
   tabClick: function(e) {
     const category = this.data.categories.find(ele => {
       return ele.id == e.currentTarget.dataset.id
@@ -130,33 +135,34 @@ Page({
       selectCurrent: e.index
     })
   },
+
   onLoad: function(e) {
-    console.log("index-onLoad:",e)
-    wx.showShareMenu({
-      withShareTicket: true,
-    })
-    const that = this
-    // 读取分享链接中的邀请人编号
-    if (e && e.inviter_id) {
-      wx.setStorageSync('referrer', e.inviter_id)
-    }
-    // 读取小程序码中的邀请人编号
-    if (e && e.scene) {
-      const scene = decodeURIComponent(e.scene)
-      if (scene) {        
-        wx.setStorageSync('referrer', scene.substring(11))
-      }
-    }
+    // console.log("index-onLoad:",e)
+    // wx.showShareMenu({
+    //   withShareTicket: true,
+    // })
+    // const that = this
+    // // 读取分享链接中的邀请人编号
+    // if (e && e.inviter_id) {
+    //   wx.setStorageSync('referrer', e.inviter_id)
+    // }
+    // // 读取小程序码中的邀请人编号
+    // if (e && e.scene) {
+    //   const scene = decodeURIComponent(e.scene)
+    //   if (scene) {        
+    //     wx.setStorageSync('referrer', scene.substring(11))
+    //   }
+    // }
     // 静默式授权注册/登陆
     AUTH.checkHasLogined().then(isLogined => {
       if (!isLogined) {
         AUTH.authorize().then( aaa => {
-          AUTH.bindSeller()
-          TOOLS.showTabBarBadge()
+          // AUTH.bindSeller()
+          // TOOLS.showTabBarBadge()
         })
       } else {
-        AUTH.bindSeller()
-        TOOLS.showTabBarBadge()
+        // AUTH.bindSeller()
+        // TOOLS.showTabBarBadge()
       }
     })
     // this.initBanners()
@@ -241,9 +247,9 @@ Page({
       shopInfo: wx.getStorageSync('shopInfo')
     })
     // 获取购物车数据，显示TabBarBadge
-    TOOLS.showTabBarBadge()
-    this.goodsDynamic()
-    this.miaoshaGoods()
+    // TOOLS.showTabBarBadge()
+    // this.goodsDynamic()
+    // this.miaoshaGoods()
   },
   async goodsDynamic(){
     const res = await WXAPI.goodsDynamic(0)

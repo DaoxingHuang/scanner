@@ -167,10 +167,11 @@ async function authorize() {
               wx.setStorageSync('uid', res.data.uid)
               resolve(res)
             } else {
-              wx.showToast({
-                title: res.msg,
-                icon: 'none'
-              })
+              // 域名错误
+              // wx.showToast({
+              //   title: res.msg,
+              //   icon: 'none'
+              // })
               reject(res.msg)
             }
           })
