@@ -5,7 +5,7 @@
     </view>
     <view class="radio-group">
     <van-radio-group  direction="horizontal" value="{{ '#000000' }}" bind:change="onColorChange">
-      <van-radio wx:for="{{colors}}" custom-class="radio-custom-class"  name="{{item}}"  label-class="label-class-item" wx:key="index"  checked-color="{{item}}"></van-radio>
+      <van-radio wx:for="{{colors}}" custom-class="radio-custom-class" icon-class="radio-icon-class"  style="--aak-color:{{ item }}"   name="{{item}}"  label-class="label-class-item" wx:key="index"  checked-color="{{item}}"></van-radio>
       <!-- <van-radio name="2" checked-color="#07c160">单选框 2</van-radio> -->
     </van-radio-group>
     </view>

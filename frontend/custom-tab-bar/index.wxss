@@ -37,16 +37,7 @@
 .fontWeight{
   font-weight: bold;
 }
-.bg_rec{
-  /* background: #ffd324;
-  width: 80rpx;
-  min-height: auto;
-  height: 20rpx;
-  margin-top: -28rpx;
-  vertical-align: text-bottom;
-  border-radius: 0;
-  z-index: -10; */
-}
+
 .center_img{
   width: 50rpx;
   height: 50rpx;
@@ -56,11 +47,6 @@
   bottom: 26px;
   /* z-index: 10; */
 }
-.center-has-image{
-  /* bottom: 30px; */
-  /* z-index: 11; */
-}
-
 .img-no-text{
   width: 140rpx;
   height: 140rpx;

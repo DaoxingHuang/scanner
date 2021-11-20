@@ -67,6 +67,16 @@ page {
   /* height: 300rpx;
   width: 100%; */
 }
+.radio-icon-class{
+  background: var(--aak-color);
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 100%;
+}
+
+.radio-icon-class::before{
+  /* content: none; */
+}
 
 .radio-custom-class{
   transform: rotate(90deg);
