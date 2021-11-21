@@ -38,7 +38,7 @@
       </view>
 
    <!-- 3 -->
-      <view class="main-item main-item-T ">
+      <view class="main-item main-item-T " bindtap="pictureToText">
         <view class="main-item-img">
           <view class="main-item-img-content main-item-img-content-T">
           </view>
@@ -56,17 +56,17 @@
 
 
       <!-- 4 -->
-      <view class="main-item main-item-T " bindtap="showFileSelectSign">
+      <view class="main-item main-item-signature " bindtap="showFileSelectSign">
         <view class="main-item-img">
-          <view class="main-item-img-content main-item-img-content-T">
+          <view class="main-item-img-content main-item-img-content-signature">
           </view>
         </view>
         <view class="main-item-txt">
           <view class="main-item-txt-title">
-            图片签字
+            签名标注
           </view>
           <view class="main-item-txt-sub-title">
-            图片转txt/word 、支持复制分享
+            图片签名及标注
           </view>
         </view>
       </view>

@@ -1,5 +1,6 @@
 {
+  "navigationBarTitleText": "图片编辑",
   "usingComponents": {
     "image-cropper": "../../components/image-cropper/image-cropper"
-}
+  }
 }

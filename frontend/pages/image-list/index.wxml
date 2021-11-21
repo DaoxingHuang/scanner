@@ -1,0 +1,10 @@
+<!--pages/image-list/index.wxml-->
+<view>
+  <view class="imagelist">
+    <view class="image-add">
+
+    </view>
+
+  </view>
+  <view class="image-footer"></view>
+</view>

@@ -59,7 +59,7 @@ Page({
 
         // "pages/cropper/cropper"
         wx.redirectTo({
-          url: '/pages/signature/index?url='+ res.tempFilePaths[0],
+          url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
         })
         // // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
         // // ctx.draw();
@@ -70,6 +70,31 @@ Page({
       }
     });
   },
+
+  
+  pictureToText(e){
+    console.log("pictureToText:")
+    wx.redirectTo({
+      url: '/pages/camera/index',
+    });
+    // const ctx = wx.createCameraContext();
+    // console.log("createCameraContext:",this.ctx)
+
+    // this.ctx.takePhoto({
+    //   quality: 'high',
+    //   success: (res) => {
+    //     this.setData({
+    //       src: res.tempImagePath
+    //     })
+    //   },
+    //   fail:(res) => {
+    //     console.log("fail:",res)
+    //   },
+    // })
+  },
+
+  // <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+
 
   tabClick: function(e) {
     const category = this.data.categories.find(ele => {
@@ -137,6 +162,8 @@ Page({
   },
 
   onLoad: function(e) {
+    this.ctx = wx.createCameraContext()
+
     // console.log("index-onLoad:",e)
     // wx.showShareMenu({
     //   withShareTicket: true,

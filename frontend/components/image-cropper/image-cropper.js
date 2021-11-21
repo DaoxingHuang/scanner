@@ -362,7 +362,6 @@ Component({
                     this.data.watch.cut_left(null, this);
                 }
                 if (transform.cutY) {
-                    debugger;
                     this.setData({
                         cut_top: cutY + transform.cutY
                     });
@@ -387,7 +386,6 @@ Component({
              * 设置剪裁框位置
              */
             setCutXY(x, y) {
-                debugger;
 
                 this.setData({
                     cut_top: y,
@@ -409,7 +407,6 @@ Component({
              */
             setCutCenter() {
                 let cut_top = (this.data.info.windowHeight - this.data.height) * 0.3;
-                debugger;
 
                 let cut_left = (this.data.info.windowWidth - this.data.width) * 0.5;
                 console.log("cut_top:",cut_top," cut_left:",cut_left);
@@ -424,7 +421,6 @@ Component({
             _setCutCenter() {
                 let cut_top = (this.data.info.windowHeight - this.data.height) * 0.3;
                 let cut_left = (this.data.info.windowWidth - this.data.width) * 0.5;
-                debugger;
 
                 this.setData({
                     cut_top: cut_top, //截取的框上边距

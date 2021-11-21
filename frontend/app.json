@@ -56,7 +56,9 @@
     "pages/card/logs",
     "pages/home/index",
     "pages/cropper/cropper",
-    "pages/signature/index"
+    "pages/signature/index",
+    "pages/camera/index",
+    "pages/image-list/index"
   ],
   "subpackages": [
     {
@@ -191,7 +193,9 @@
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "van-slider": "@vant/weapp/slider/index"
+    "van-slider": "@vant/weapp/slider/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
   },
   "sitemapLocation": "sitemap.json"
 }
