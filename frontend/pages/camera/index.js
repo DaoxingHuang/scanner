@@ -1,8 +1,8 @@
 Page({
   data:{
-    active:0,
+    active:1,
     colors:["12","3","4"],
-    checked:false,
+    checked:true,
     images:[],
     curSrc:'',
     showFileSelect:false,
@@ -18,7 +18,13 @@ Page({
 
   onSwitchChange(e){
     console.log(e.detail);
-    this.setData({checked:e.detail})
+    const checked=e.detail;
+    wx.showToast({
+      title: checked?'多拍模式':'单拍模式',
+      icon: 'success_no_circle',
+      duration: 1000
+    })
+    this.setData({checked});
   },
 
   setImageList(url){
@@ -30,6 +36,12 @@ Page({
       images: clone,
       curSrc:url
     })
+  },
+
+  goToImages(){
+    wx.navigateTo({
+      url: '/pages/image-list/index?images='+ JSON.stringify(this.data.images),
+    });
   },
 
   takePhoto() {

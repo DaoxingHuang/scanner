@@ -89,9 +89,54 @@
 }
 
 .fixed-width{
-  width: 60rpx;
+  height: 100%;
+  position: relative;
+}
+.sigle-mode{
+  position: absolute;
+  left:10rpx;
+  top:10rpx;
   height: 100%;
 }
+
+.multiple-mode{
+  position: absolute;
+  right: 10rpx;
+  top:10rpx;
+  color:red;
+  height: 100%;
+}
+
+.radio-node-class{
+  border-radius:60%;
+}
+
+.radio-node-class::before{
+  content: "单拍";
+  color: #07c160;
+  font-size: 24rpx;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  line-height: 60rpx;
+  height: 100%;
+}
+.radio-node-class-mult{
+  color: #1989fa;
+}
+.radio-node-class-mult::before{
+  content: "多拍";
+  color: #1989fa;
+}
+/* .radio-node-class::after{
+  content:"多拍";
+  color:red;
+  font-size: 20rpx;
+  text-align: center;
+} */
+
+/* <view class="sigle-mode">单</view>
+<view class="multiple-mode">多</view> */
 
 /* .choose:active{
   display: flex;
@@ -99,3 +144,7 @@
   align-items: center;
   margin-top:20rpx;
 } */
+
+van-switch__node::before{
+  content: "123";
+}

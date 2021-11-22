@@ -19,14 +19,16 @@
       <view class="main-camera-container" bindtap="takePhoto">
         <view class="main-camera"></view>
       </view>
-      <view class="main-camera-list fixed-width" wx:if="{{images.length>0&&checked}}">
+      <view class="main-camera-list fixed-width" wx:if="{{images.length>0&&checked}}" bindtap="goToImages">
         <!-- <view class="main-camera-list"> -->
           <van-image  width="60rpx" fit="contain" height="60rpx" src="{{curSrc}}" />
           <view class='main-camera-count'>{{images.length}}</view>
        </view>
        <view class="fixed-width" wx:if="{{images.length<=0}}">
-        <van-switch checked="{{ checked }}" bind:change="onSwitchChange" > 单双拍
+        <van-switch checked="{{ checked }}" node-class="{{!checked ? \"radio-node-class radio-node-class-mult\":\"radio-node-class\"}}"	  active-color="#07c160"   inactive-color="#1989fa" bind:change="onSwitchChange" >
         </van-switch>
+        <!-- <view class="sigle-mode">单</view>
+        <view class="multiple-mode">多</view> -->
        </view>
     </view>
   </view>
