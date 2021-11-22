@@ -30,8 +30,8 @@ Page({
   },
 
   goToCamera(){
-    wx.redirectTo({
-      url: '/pages/camera/index',
+    wx.navigateBack({
+      delta: 0,
     });
   },
 
@@ -99,6 +99,24 @@ Page({
     beginIndex: e.currentTarget.dataset.index
   })
 },
+  //删除图片
+  deletePic: function (e) {
+    let images = this.data.tempFilePaths;
+    let index = e.currentTarget.dataset.id;
+    images.splice(index, 1);
+    this.setData({
+      tempFilePaths: images
+    })
+    if (this.data.tempFilePaths.length != 0 || this.data.releaseText != "") {
+      this.setData({
+        arrayNull: false
+      })
+    } else {
+      this.setData({
+        arrayNull: true
+      })
+    }
+  },
 
 
 touchm: function (e) {

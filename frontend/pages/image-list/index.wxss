@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   width: 100%;
   margin: 20rpx 20rpx;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .imagelist:last-child{
  justify-self: flex-start;
@@ -12,9 +12,10 @@
 
 .image-size{
   height: 240rpx;
-  width: 200rpx;
+  width: 30%;
   margin:10rpx ;
   border: 3rpx dashed #1296db;
+  position: relative;
 }
 .image-add{
   /* margin-left: 20rpx; */
@@ -40,4 +41,23 @@
   /* margin: 0 30rpx; */
   /* margin-left: 30rpx;
   margin-right: 30rpx; */
+}
+
+.close-custom-class{
+  position: absolute;
+  top:10rpx;
+  right: 10rpx;
+  opacity: 0.6;
+}
+
+.close-custom-class:active{
+  opacity: 1;
+}
+
+
+.drag-note{
+  width: 100%;
+  font-size: 0.8rem;
+  color: gray;
+  text-align: center;
 }
