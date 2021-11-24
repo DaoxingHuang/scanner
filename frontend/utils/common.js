@@ -12,7 +12,6 @@ function urlTobase64(url,options){
       success:res=>{
         //把arraybuffer转成base64
             let base64 = wx.arrayBufferToBase64(res.data); 
-            
             //不加上这串字符，在页面无法显示的哦
             const withHeader = options.header||true;
             base64　= withHeader ? 'data:image/jpeg;base64,' + base64　:base64　;
