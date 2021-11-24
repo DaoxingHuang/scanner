@@ -2,7 +2,28 @@ function isPromse(obj){
   return (!!obj
   && (typeof obj === 'object' || typeof obj === 'function') 
   && typeof obj.then === 'function');
-};
+}
+
+function urlTobase64(url,options){
+  return new Promise((reslove,reject)=>{
+    wx.request({
+      url:url,
+      responseType: 'arraybuffer', //最关键的参数，设置返回的数据格式为arraybuffer
+      success:res=>{
+        //把arraybuffer转成base64
+            let base64 = wx.arrayBufferToBase64(res.data); 
+            
+            //不加上这串字符，在页面无法显示的哦
+            const withHeader = options.header||true;
+            base64　= withHeader ? 'data:image/jpeg;base64,' + base64　:base64　;
+            reslove(base64);
+            //打印出base64字符串，可复制到网页校验一下是否是你选择的原图片呢
+            // console.log(base64)　
+          }
+    })
+  })
+}
+
 module.exports={
-  isPromse,
+  isPromse,urlTobase64
 }
