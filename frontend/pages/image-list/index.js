@@ -35,6 +35,11 @@ Page({
     });
   },
 
+  gotToRecog(){
+    wx.navigateTo({
+      url: '/pages/recognition/index?images='+ JSON.stringify(this.data.tempFilePaths),
+    })
+  },
   longtap: function (e) {
     let maskImg = e.currentTarget.dataset.img;
     console.log(123,"longtap")

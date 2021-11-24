@@ -58,7 +58,8 @@
     "pages/cropper/cropper",
     "pages/signature/index",
     "pages/camera/index",
-    "pages/image-list/index"
+    "pages/image-list/index",
+    "pages/recognition/index"
   ],
   "subpackages": [
     {

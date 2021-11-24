@@ -19,6 +19,6 @@
     <view class="drag-note">长按可以拖动排序</view>
   </movable-area>
   <view class="image-footer">
-    <van-button type="primary" custom-class="shibie-custom-class" block >开始识别</van-button>
+    <van-button type="primary" bind:click="gotToRecog" custom-class="shibie-custom-class" block >开始识别</van-button>
   </view>
 </view>
