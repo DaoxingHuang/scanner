@@ -23,6 +23,26 @@ function urlTobase64(url,options){
   })
 }
 
+function localFileTobase64(path,options){
+  const fileManager = wx.getFileSystemManager();
+  let base64 = fileManager.readFileSync(path, 'base64');
+  return new Promise((reslove,reject)=>{
+    const withHeader = options.header||true;
+     base64　= withHeader ? 'data:image/jpeg;base64,' + base64　:base64　;
+     reslove(base64);
+  })
+}
+
+function getEnv() {
+  let res = wx.getSystemInfoSync();
+  // 客户端中host有值，本地开发的时候host为null
+  if (res.host) {
+    return 'pro';
+  } else {
+    return 'dev';
+  }
+}
+
 module.exports={
-  isPromse,urlTobase64
+  isPromse,urlTobase64,getEnv,localFileTobase64
 }

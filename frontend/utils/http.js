@@ -31,11 +31,6 @@ function postData(url, postData,{headers}) {
       data: postData,
       method: 'POST',
       success: function (res) {
-        // //参数值为res.data,直接将返回的数据传入
-        // if (res.data.result.token) { // 如果有token保存下来，下次请求带着token访问
-        //   config.httpToken = res.data.result.token;
-        //   console.log("token--> ", config.httpToken)
-        // }
         console.log("success")
         resolve(res.data);
       },
