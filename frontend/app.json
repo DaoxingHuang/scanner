@@ -5,8 +5,6 @@
     "pages/notice/index",
     "pages/notice/show",
     "pages/category/category",
-    "pages/goods/list",
-    "pages/goods/list-vop",
     "pages/select-address/index",
     "pages/wuliu/index",
     "pages/my/index",
@@ -18,7 +16,6 @@
     "pages/score/index",
     "pages/score/growth",
     "pages/sign/index",
-    "pages/maidan/index",
     "pages/coupons/index",
     "pages/coupons/merge",
     "pages/invoice/list",
@@ -45,7 +42,8 @@
     "pages/signature/index",
     "pages/camera/index",
     "pages/image-list/index",
-    "pages/recognition/index"
+    "pages/recognition/index",
+    "pages/word-editor/index"
   ],
   "subpackages": [
     {
@@ -57,16 +55,6 @@
         "pages/live-anchor/list",
         "pages/live-client/list",
         "pages/live-client/client"
-      ]
-    },
-    {
-      "root": "packageCps",
-      "name": "packageCps",
-      "pages": [
-        "pages/goods-details/cps-jd",
-        "pages/goods-details/cps-pdd",
-        "pages/goods-details/cps-taobao",
-        "pages/order-list/cps"
       ]
     },
     {

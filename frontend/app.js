@@ -2,9 +2,9 @@ const WXAPI = require('apifm-wxapi')
 const CONFIG = require('config.js')
 const AUTH = require('utils/auth');
 // 打开调试
-wx.setEnableDebug({
-  enableDebug: true
-})
+// wx.setEnableDebug({
+//   enableDebug: true
+// })
 
 App({
   onLaunch: function() {
@@ -70,6 +70,7 @@ App({
         this.globalData.navTop = navTop;
         this.globalData.windowHeight = res.windowHeight;
         this.globalData.menuButtonObject = menuButtonObject;
+        this.globalData.screenWidth = res.screenWidth;
         console.log("navHeight",navHeight);
       },
       fail(err) {

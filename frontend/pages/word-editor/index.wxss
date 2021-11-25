@@ -1,0 +1,66 @@
+/* pages/word-editor/index.wxss */
+
+.container{
+  justify-content: flex-start;
+}
+
+.header{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 10rpx 0;
+  border-bottom: rgba(128, 128, 128, 0.2) solid 3rpx;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+.header-item{
+}
+
+.image-container{
+  position: relative;
+}
+/* .text-mask{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+} */
+.movable-area{
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+}
+
+.drawer{
+  position: absolute;
+  bottom: 30rpx;
+}
+
+.dragger-item {
+  height: 60rpx;
+  width: 80rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAFtJREFUWEft1EEOABAMRNFxM07O0YSlkFhoSvweYNo8rSDnCs79xQAIIIAAAiuBLCke/qaLpDRmXj3AYYAety1g0Xyaee0VtCW0qO0n4Aos+N9aQgQQQACBfwQqzd8KIcp0iYAAAAAASUVORK5CYII=');
+}
+
+.dragger-movable-view{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #008ef6;
+}
+
+.text-area{
+  position: absolute;
+  bottom: 80rpx;
+  width: 100%;
+  border: blue solid 3rpx;
+  background:black;
+  color:white;
+}

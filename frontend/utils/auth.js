@@ -172,7 +172,7 @@ async function authorize() {
               //   title: res.msg,
               //   icon: 'none'
               // })
-              reject(res.msg)
+              // reject(res.msg)
             }
           })
         }

@@ -37,29 +37,53 @@ Page({
     tasks.map(task=>{
       task.then(async data=>{
         const index = data.index;
-        console.log(1234567890);
         const clone = Object.assign({},data,{status:1});
         this.data.images.splice(index,1,clone);
         const base64 = await urlTobase64(data.url,{header:false});
+        console.log(base64);
+
         const bdurl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.e5c628434b36f9ad46bf27ef65913e8d.2592000.1640329068.282335-25222063';
         // https://cloud.baidu.com/doc/OCR/s/Ck3h7y2ia
         // Content-Type为application/x-www-form-urlencoded
         const ret = await postData(bdurl,{image:base64},{headers:{'Content-Type':"application/x-www-form-urlencoded"}});
-        const newImages = this.data.images.map(async item=>{
+        const newImages = this.data.images.map(item=>{
           // https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.
           return {...item,base64,rego:ret};
-        })
+        });
+        console.log("newImages:",newImages);
         this.setData({images:newImages});
         count = count+1;
       })
     })
   },
 
+  onTabbarChange(e){
+    console.log(e.detail);
+    const data = Object.assign({},this.data.images[0]);
+    console.log(data);
+    delete data.base64;
+    wx.navigateTo({
+      url: '/pages/word-editor/index?item='+ encodeURI(JSON.stringify(data)),
+      events:{
+           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function(data) {
+          console.log(data)
+        },
+        someEvent: function(data) {
+          console.log(data)
+        }
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data })
+      }
+    })
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady: function () {
-    this.startRun();
+  onReady: async function () {
+    await this.startRun();
   },
 
   /**
