@@ -38,7 +38,10 @@ Page({
   },
 
   onTabbarChange(e){
-
+    if(e.detail === "copy"){
+      this.copyText();
+    }
+    console.log(e);
   },
   reacClick(e){
     console.log("reacClick:");
@@ -47,7 +50,11 @@ Page({
     this.setData({top:event.detail.y+10});
     // event.detail = {x, y, source}
   },
-
+  bindTextAreaBlur: function(e) {
+    this.setData({
+      longText:e.detail.value
+    }) 
+  }, 
   onImgLoad(e){
     console.log("img:",e);
     console.log('rects:');
@@ -72,10 +79,9 @@ Page({
     this.setData({rate,height:actualHeight/rate,rects,longText});
   },
 
-  copyText: function (e) {
-    console.log(e)
+  copyText: function () {
     wx.setClipboardData({
-      data: e.currentTarget.dataset.text,
+      data: this.data.longText,
       success: function (res) {
         wx.getClipboardData({
           success: function (res) {
@@ -127,6 +133,6 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
-
+    return this.data.longText;
   }
 })
