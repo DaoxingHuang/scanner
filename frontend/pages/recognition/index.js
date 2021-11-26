@@ -1,5 +1,5 @@
 // pages/recognition/index.js
-import { urlTobase64, getEnv, localFileTobase64 } from '../../utils/common';
+import { urlTobase64, getEnv, localFileTobase64,copyText } from '../../utils/common';
 import { postData } from '../../utils/http';
 import { getOcrUrl } from "../../services/baidu/ocr";
 
@@ -9,6 +9,7 @@ Page({
    */
   data: {
     all:false,
+    images:[],
   },
 
   /**
@@ -26,7 +27,12 @@ Page({
   seeResult:function(e){
     const index = e.currentTarget.dataset.index;
     console.log("seeResult:",index);
-    this.seeSingleResult(index);
+    const clickItem = this.data.images[index];
+    if(clickItem&&!(clickItem.status===2)){
+      console.log("status:",clickItem.status);
+      return;
+    }
+    this.seeSingleResult(clickItem);
   },
   async startRun(){
     console.log(1234567890);
@@ -56,14 +62,18 @@ Page({
         // https://cloud.baidu.com/doc/OCR/s/Ck3h7y2ia
         // Content-Type为application/x-www-form-urlencoded
         const ret = await postData(bdurl,{image:base64},{headers:{'Content-Type':"application/x-www-form-urlencoded"}});
-        if(!ret.error_code){
+        if(!ret.error_code&&ret.words_result_num){
           item.status = 2;
           item.base64 = base64;
           item.rego = ret;
         }
+        else if(!ret.words_result_num){
+          item.status = 9;
+          // item.base64 = base64;
+        }
         else{
           item.status = 3;
-          item.base64 = base64;
+          // item.base64 = base64;
         }
         console.log("item:",item);
         console.log("ret:",ret);
@@ -86,9 +96,8 @@ Page({
     // this.setData({images:wills});
   },
 
-  seeSingleResult(index=0){
-    const data = Object.assign({},this.data.images[index]);
-    console.log(345,index,data);
+  seeSingleResult(item){
+    const data = Object.assign({},item);
     delete data.base64;
     wx.navigateTo({
       url: '/pages/word-editor/index?item='+ encodeURI(JSON.stringify(data)),
@@ -108,8 +117,24 @@ Page({
     })
   },
 
+  coypAll(){
+    const handledImgs = this.data.images;
+    const allText=[];
+    handledImgs.map((item)=>{
+      const words =  (item.rego.words_result||[]).map(item=>item.words);
+      allText.push(words);
+    })
+    console.log('allText:',allText);
+    copyText(allText.join(''));
+    // return allText.join('');
+  },
+
   onTabbarChange(e){
-    this.seeSingleResult(0);
+    const action = e.detail;
+    const images = this.data.imagses
+    if(action === 'copy'){
+      this.coypAll();
+    }
   },
   /**
    * Lifecycle function--Called when page is initially rendered

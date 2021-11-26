@@ -16,6 +16,10 @@
 .header-item{
 }
 
+.header-item:active{
+  color:#07c160
+}
+
 .image-container{
   position: relative;
 }
@@ -53,14 +57,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #008ef6;
+  background: #07c160;
 }
 
 .text-area{
   position: absolute;
   bottom: 80rpx;
   width: 100%;
-  border: blue solid 3rpx;
+  border: #07c160 solid 3rpx;
   background:black;
   color:white;
 }

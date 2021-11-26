@@ -4,16 +4,18 @@
       <view   class="image-size" bindtap="seeResult" data-index="{{index}}"  data-img="{{item}}"  wx:for="{{images}}" 
        wx:key="item">
         <van-image class="item" width="100%" fit='contain' data-index="{{index}}"  data-img="{{item}}" height="240rpx"  src="{{item.url}}" />
-        <view class="imageMask" wx:if="{{!item.status}}"><van-loading size="24px">识别中...</van-loading>
-   </view>
+        <view class="imageMask" wx:if="{{!item.status}}"><van-loading size="24px">识别中...</van-loading> </view>
+        <view class="imageMask imageMask-success" wx:if="{{item.status===2}}"><van-loading size="24px">识别成功</van-loading> </view>
+          <view class="imageMask imageMask-fail" wx:if="{{item.status===3}}"><van-loading size="24px">识别失败</van-loading> </view>
+          <view class="imageMask imageMask-no-text" wx:if="{{item.status===9}}"><van-loading size="24px">无文字</van-loading> </view>
       </view>
     </view> 
-    <view class="drag-note">完成后可以点击任意图片查看结果</view>
+    <view class="drag-note">可点击识别成功查看单个识别结果</view>
     <van-tabbar active="{{ active }}" bind:change="onTabbarChange">
       <!-- <van-icon name="description" /> -->
-      <van-tabbar-item icon="description">复制全部</van-tabbar-item>
+      <van-tabbar-item name="copy" icon="description">复制全部</van-tabbar-item>
       <!-- <van-icon name="share-o" /> -->
-      <van-tabbar-item icon="search" dot>查看识别结果</van-tabbar-item>
+      <!-- <van-tabbar-item icon="search" dot>查看识别结果</van-tabbar-item> -->
       <van-tabbar-item icon="share-o" >导出</van-tabbar-item>
     </van-tabbar>
 </view>

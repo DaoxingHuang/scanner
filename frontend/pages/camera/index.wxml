@@ -1,5 +1,11 @@
 <view class="container">
   <view class="camera-container">
+    <view class="line line-hor line-hor-33"></view>
+    <view class="line line-hor line-hor-66"></view>
+    <view class="line line-ver line-ver-33"></view>
+    <view class="line line-ver line-ver-66"></view>
+    <view class="line-note">平行参考线拍摄</view>
+
     <camera  class="camera" device-position="back" flash="off" binderror="error"></camera>
   </view>
   <view class="operaion">
@@ -25,7 +31,7 @@
           <view class='main-camera-count'>{{images.length}}</view>
        </view>
        <view class="fixed-width" wx:if="{{images.length<=0}}">
-        <van-switch checked="{{ checked }}"  node-class="{{!checked ? \"radio-node-class radio-node-class-mult\":\"radio-node-class\"}}"	  active-color="#07c160"   inactive-color="#1989fa" bind:change="onSwitchChange" >
+        <van-switch checked="{{ checked }}" disabled="true" node-class="{{!checked ? \"radio-node-class radio-node-class-mult\":\"radio-node-class\"}}"	  active-color="#07c160"   inactive-color="#1989fa" bind:change="onSwitchChange" >
         </van-switch>
         <!-- <view class="sigle-mode">单</view>
         <view class="multiple-mode">多</view> -->

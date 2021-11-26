@@ -1,5 +1,7 @@
 // pages/word-editor/index.js
 
+import { copyText } from '../../utils/common';
+
 const app = getApp();
 
 Page({
@@ -39,9 +41,8 @@ Page({
 
   onTabbarChange(e){
     if(e.detail === "copy"){
-      this.copyText();
+      copyText(this.data.longText);
     }
-    console.log(e);
   },
   reacClick(e){
     console.log("reacClick:");
@@ -79,20 +80,20 @@ Page({
     this.setData({rate,height:actualHeight/rate,rects,longText});
   },
 
-  copyText: function () {
-    wx.setClipboardData({
-      data: this.data.longText,
-      success: function (res) {
-        wx.getClipboardData({
-          success: function (res) {
-            wx.showToast({
-              title: '复制成功'
-            })
-          }
-        })
-      }
-    })
-  },
+  // copyText: function () {
+  //   wx.setClipboardData({
+  //     data: this.data.longText,
+  //     success: function (res) {
+  //       wx.getClipboardData({
+  //         success: function (res) {
+  //           wx.showToast({
+  //             title: '复制成功'
+  //           })
+  //         }
+  //       })
+  //     }
+  //   })
+  // },
 
   /**
    * Lifecycle function--Called when page show
@@ -126,7 +127,6 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
   },
 
   /**

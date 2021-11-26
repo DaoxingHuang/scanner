@@ -37,7 +37,21 @@
   align-items: center;
   font-size: 0.8rem;
 }
+.imageMask-success{
+  color:#07c160;
+  opacity: 0.8;
+}
+.imageMask-success:active{
+  opacity: 0.2;
+}
 
+.imageMask-fail{
+  color:red;
+}
+
+.imageMask-no-text{
+  color:#ff976a;
+}
 .drag-note{
   width: 100%;
   font-size: 0.8rem;

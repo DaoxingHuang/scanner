@@ -29,7 +29,7 @@
     </movable-view>
   <van-tabbar  active="{{ active }}" bind:change="onTabbarChange">
       <!-- <van-icon name="description" /> -->
-      <van-tabbar-item name="copy" icon="description">复制全部</van-tabbar-item>
+      <van-tabbar-item name="copy" icon="description">复制</van-tabbar-item>
       <!-- <van-icon name="share-o" /> -->
       <!-- <van-tabbar-item icon="search" dot>查看识别结果</van-tabbar-item> -->
       <van-tabbar-item icon="share-o" >导出</van-tabbar-item>

@@ -80,6 +80,12 @@ Page({
       success: (res) => {
        const clone = Array.from(this.data.images);
        const url = res.tempImagePath;
+       if(this.data.images.length>=6){
+          wx.showToast({
+            title: '最多6张图片'
+          });
+         return;
+       }
        this.setImageList(url);
       }
     })
@@ -115,6 +121,12 @@ Page({
       success (res) {
         // tempFilePath可以作为img标签的src属性显示图片
       console.log("res:",res);
+      if(that.data.images.length>=6){
+        wx.showToast({
+          title: '最多6张图片'
+        });
+       return;
+      }
       that.setImageList(res.tempFiles[0].path);
       }
     })
@@ -122,11 +134,18 @@ Page({
 
 
   chooseImage:function(sizeType=['original', 'compressed'],sourceType=['album', 'camera']){
+    const that = this;
     wx.chooseImage({
       count: 1,
       sizeType,  //可选择原图或压缩后的图片
       sourceType, //可选择性开放访问相册、相机
       success: res => {
+        if(that.data.images.length>=6){
+          wx.showToast({
+            title: '最多6张图片'
+          });
+         return;
+        }
         this.setImageList(res.tempFilePaths[0]);
         // "pages/cropper/cropper"
         // wx.redirectTo({

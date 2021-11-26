@@ -6,6 +6,7 @@
 }
 
 .camera-container{
+  position: relative;
 }
 
 .camera{
@@ -151,4 +152,44 @@
 
 van-switch__node::before{
   content: "123";
+}
+
+.line{
+  position: absolute;
+  background-color: white;
+}
+
+.line-hor{
+  width: 2rpx;
+  height: 100%;
+  z-index: 10;
+}
+
+.line-hor-33{
+  left:33%;
+}
+.line-hor-66{
+  left:66%;
+}
+
+.line-ver{
+  width:100%;
+  height: 1rpx;
+  z-index: 10;
+}
+
+.line-ver-33{
+  top:33%;
+}
+.line-ver-66{
+  top:66%;
+}
+
+.line-note{
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  font-size: 25rpx;
 }

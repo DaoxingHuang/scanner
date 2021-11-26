@@ -44,6 +44,21 @@ function getEnv() {
   }
 }
 
+function copyText(data) {
+  wx.setClipboardData({
+    data,
+    success: function (res) {
+      wx.getClipboardData({
+        success: function (res) {
+          wx.showToast({
+            title: '复制成功'
+          })
+        }
+      })
+    }
+  })
+}
+
 module.exports={
-  isPromse,urlTobase64,getEnv,localFileTobase64
+  isPromse,urlTobase64,getEnv,localFileTobase64,copyText
 }
