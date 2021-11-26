@@ -43,6 +43,7 @@
   border-radius: 100%;
   border-color: green;
   transform: rotate(-45deg);
+
 }
 .main-camera{
   border-radius: 50%;
@@ -91,6 +92,8 @@
 .fixed-width{
   height: 100%;
   position: relative;
+  min-width: 12vw;
+  text-align: right;
 }
 .sigle-mode{
   position: absolute;

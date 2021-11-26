@@ -25,7 +25,7 @@
           <view class='main-camera-count'>{{images.length}}</view>
        </view>
        <view class="fixed-width" wx:if="{{images.length<=0}}">
-        <van-switch checked="{{ checked }}" node-class="{{!checked ? \"radio-node-class radio-node-class-mult\":\"radio-node-class\"}}"	  active-color="#07c160"   inactive-color="#1989fa" bind:change="onSwitchChange" >
+        <van-switch checked="{{ checked }}"  node-class="{{!checked ? \"radio-node-class radio-node-class-mult\":\"radio-node-class\"}}"	  active-color="#07c160"   inactive-color="#1989fa" bind:change="onSwitchChange" >
         </van-switch>
         <!-- <view class="sigle-mode">单</view>
         <view class="multiple-mode">多</view> -->

@@ -5,10 +5,10 @@
     <view class="imagelist">
       <view class="image-size image-add"  bindtap="goToCamera">
       </view>
-      <view   bindlongpress="longtap" class="image-size" data-index="{{index}}"  data-img="{{item}}"  wx:for="{{tempFilePaths}}" 
+      <view   wx:for="{{tempFilePaths}}"  bindlongpress="longtap" class="image-size" data-index="{{index}}"  data-img="{{item}}" 
        wx:key="item"  bindtouchstart="touchs" bindtouchend="touchend" bindtouchmove="touchm" >
         <van-image class="item" width="100%" fit='contain' data-index="{{index}}"  data-img="{{item}}" height="240rpx"  src="{{item}}" />
-        <van-icon custom-class="close-custom-class" bindtap="deletePic" size='40rpx' custom-style='position: absolute;'	 name="close" />
+        <van-icon custom-class="close-custom-class"  data-index="{{index}}"  data-img="{{item}}"  bindtap="deletePic" size='40rpx' custom-style='position: absolute;'	 name="close" />
       </view>
         <movable-view x="{{x}}" y="{{y}}" direction="all" damping="{{5000}}" friction="{{1}}" disabled="{{disabled}}">
             <view class='item-move' hidden='{{hidden}}'>

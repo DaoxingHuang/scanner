@@ -39,8 +39,37 @@ Page({
   },
 
   goToImages(){
+    const images = this.data.images;
+    if(images.length<=0){
+      wx.showToast({
+        title: '请拍照或是选择照片',
+        icon: 'success_no_circle',
+        duration: 1000
+      })
+      return;
+    };
+    const that = this;
     wx.navigateTo({
       url: '/pages/image-list/index?images='+ JSON.stringify(this.data.images),
+      events: {
+        // https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateTo.html
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function(data) {
+          console.log(data)
+        },
+        someEvent: function(data) {
+          console.log(data)
+        },
+        removeImage: function(data) {
+          console.log(data);
+          const url = data.length>0?data[data.length-1]:'';
+          that.setData({images:data,curSrc:url});
+        },
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: that.data.images })
+      }
     });
   },
 
@@ -79,17 +108,14 @@ Page({
   },
    
   chooseMessageFile:function(e){
+    const that = this;
     wx.chooseMessageFile({
       count: 1,
       type: 'image',
       success (res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        this.setImageList(res.tempFiles[0]);
-
-        // wx.redirectTo({
-        //   url: '/pages/cropper/cropper?url='+ res.tempFiles[0],
-        // });
-        // const tempFilePaths = res.tempFiles
+      console.log("res:",res);
+      that.setImageList(res.tempFiles[0].path);
       }
     })
   },

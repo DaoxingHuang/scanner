@@ -24,9 +24,18 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    const imgs = JSON.parse(options.images||[]);
-    console.log(imgs);
-    this.setData({images:imgs,tempFilePaths:imgs})
+    // const imgs = JSON.parse(options.images||[]);
+    // console.log(imgs);
+    // this.setData({images:imgs,tempFilePaths:imgs});
+    const eventChannel = this.getOpenerEventChannel();
+    const self = this;
+    // this.eventChannel = eventChannel;
+    // eventChannel.emit('acceptDataFromOpenedPage', {data: 'test'});
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function(data) {
+      console.log(data);
+      self.setData({images:data.data,tempFilePaths:data.data});
+    })
   },
 
   goToCamera(){
@@ -107,8 +116,11 @@ Page({
   //删除图片
   deletePic: function (e) {
     let images = this.data.tempFilePaths;
-    let index = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    console.log("deletePic:",index,e);
     images.splice(index, 1);
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.emit('removeImage', images);
     this.setData({
       tempFilePaths: images
     })
