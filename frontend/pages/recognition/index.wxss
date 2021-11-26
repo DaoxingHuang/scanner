@@ -37,3 +37,10 @@
   align-items: center;
   font-size: 0.8rem;
 }
+
+.drag-note{
+  width: 100%;
+  font-size: 0.8rem;
+  color: gray;
+  text-align: center;
+}

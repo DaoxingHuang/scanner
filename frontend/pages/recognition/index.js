@@ -1,6 +1,7 @@
 // pages/recognition/index.js
 import { urlTobase64, getEnv, localFileTobase64 } from '../../utils/common';
 import { postData } from '../../utils/http';
+import { getOcrUrl } from "../../services/baidu/ocr";
 
 Page({
   /**
@@ -22,77 +23,72 @@ Page({
     })
     this.setData({images:handledImgs});
   },
-
+  seeResult:function(e){
+    const index = e.currentTarget.dataset.index;
+    console.log("seeResult:",index);
+    this.seeSingleResult(index);
+  },
   async startRun(){
     console.log(1234567890);
     const handledImgs = this.data.images;
     let count = 0;
+    const that = this;
     handledImgs.map(async (item,index)=>{
         const clone = Object.assign({},item,{status:1});
         console.log("clone:",clone);
-        this.data.images.splice(index,1,clone);
+        // this.data.images.splice(index,1,clone);
         const isPrd = getEnv()==='pro';
         let base64='';
-        try{
-          !isPrd && (base64 = await urlTobase64(item.url,{header:false}));
-          isPrd && (base64 = await localFileTobase64(item.url,{header:false}));
+        if(isPrd){
+          base64 = await localFileTobase64(item.url,{header:false});
         }
-        catch(e){
-          console.log("catch base64:",e);
+        else{
+          base64 = await urlTobase64(item.url,{header:false})
         }
-        console.log(getEnv());
-        // const base64 = await urlTobase64(item.url,{header:false});
-        const bdurl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.e5c628434b36f9ad46bf27ef65913e8d.2592000.1640329068.282335-25222063';
+          // const base64 = await urlTobase64(item.url,{header:false});
+        // const bdurlcope = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.e5c628434b36f9ad46bf27ef65913e8d.2592000.1640329068.282335-25222063';
+        const bdurl = getOcrUrl();
+        // console.log("bdurl:",bdurl);
+        // console.log("bdurl:",bdurlcope);
+        // console.log("bdurl:",bdurlcope === bdurl);
+
+        
         // https://cloud.baidu.com/doc/OCR/s/Ck3h7y2ia
         // Content-Type为application/x-www-form-urlencoded
         const ret = await postData(bdurl,{image:base64},{headers:{'Content-Type':"application/x-www-form-urlencoded"}});
-        const newImages = this.data.images.map(item=>{
-          // https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.
-          return {...item,base64,rego:ret};
-        });
-        console.log("newImages:",newImages);
-        this.setData({images:newImages});
-        count = count+1;
-        if(count===this.data.images.length){
-          this.setData({all:true});
+        if(!ret.error_code){
+          item.status = 2;
+          item.base64 = base64;
+          item.rego = ret;
         }
-    });
-    // return;
-    // const tasks = handledImgs.map((item,index)=>{
-    //   return new Promise((res,reject)=>{
-    //      setTimeout(()=>{
-    //       res(item);
-    //      },index*3000)
-    //   })
-    // });
-    // let count = 0;
-    // tasks.map(task=>{
-    //   task.then(async data=>{
-    //     const index = data.index;
-    //     const clone = Object.assign({},data,{status:1});
-    //     this.data.images.splice(index,1,clone);
-    //     const base64 = await urlTobase64(data.url,{header:false});
-    //     console.log(base64);
+        else{
+          item.status = 3;
+          item.base64 = base64;
+        }
+        console.log("item:",item);
+        console.log("ret:",ret);
 
-    //     const bdurl = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.e5c628434b36f9ad46bf27ef65913e8d.2592000.1640329068.282335-25222063';
-    //     // https://cloud.baidu.com/doc/OCR/s/Ck3h7y2ia
-    //     // Content-Type为application/x-www-form-urlencoded
-    //     const ret = await postData(bdurl,{image:base64},{headers:{'Content-Type':"application/x-www-form-urlencoded"}});
-    //     const newImages = this.data.images.map(item=>{
-    //       // https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.
-    //       return {...item,base64,rego:ret};
-    //     });
-    //     console.log("newImages:",newImages);
-    //     this.setData({images:newImages});
-    //     count = count+1;
-    //   })
-    // })
+        
+        that.setData({images:that.data.images.map(item=>item)});
+        // return {...item,base64,rego:ret};
+        // const newImages = this.data.images.map(item=>{
+        //   // https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.
+        //   return {...item,base64,rego:ret,status:2};
+        // });
+        // console.log("newImages:",newImages);
+        // this.setData({images:newImages});
+        // count = count+1;
+        // if(count===this.data.images.length){
+        //   this.setData({all:true});
+        // }
+    });
+    // console.log("wills:",wills);
+    // this.setData({images:wills});
   },
 
-  onTabbarChange(e){
-    console.log(e.detail);
-    const data = Object.assign({},this.data.images[0]);
-    console.log(data);
+  seeSingleResult(index=0){
+    const data = Object.assign({},this.data.images[index]);
+    console.log(345,index,data);
     delete data.base64;
     wx.navigateTo({
       url: '/pages/word-editor/index?item='+ encodeURI(JSON.stringify(data)),
@@ -110,6 +106,10 @@ Page({
         res.eventChannel.emit('acceptDataFromOpenerPage', { data })
       }
     })
+  },
+
+  onTabbarChange(e){
+    this.seeSingleResult(0);
   },
   /**
    * Lifecycle function--Called when page is initially rendered

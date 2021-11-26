@@ -123,6 +123,7 @@
   width: 100%;
   line-height: 60rpx;
   height: 100%;
+  left: 0;
 }
 .radio-node-class-mult{
   color: #1989fa;

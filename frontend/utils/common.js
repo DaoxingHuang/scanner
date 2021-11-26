@@ -5,6 +5,7 @@ function isPromse(obj){
 }
 
 function urlTobase64(url,options){
+  console.log("urlTobase64:", url);
   return new Promise((reslove,reject)=>{
     wx.request({
       url:url,
