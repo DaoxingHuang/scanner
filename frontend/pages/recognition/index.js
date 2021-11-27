@@ -121,10 +121,17 @@ Page({
     const handledImgs = this.data.images;
     const allText=[];
     handledImgs.map((item)=>{
-      const words =  (item.rego.words_result||[]).map(item=>item.words);
-      allText.push(words);
+      const words =  ((item.rego&&item.rego.words_result)||[]).map(item=>item.words);
+      words.lenght>=0&&allText.push(words);
     })
     console.log('allText:',allText);
+    if(allText.length<=0){
+      wx.showToast({
+        icon:"error",
+        title: '无可复制文字'
+      });
+      return;
+    }
     copyText(allText.join(''));
     // return allText.join('');
   },
