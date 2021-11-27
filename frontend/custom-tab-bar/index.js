@@ -61,6 +61,9 @@ Component({
       const idx = e.currentTarget.dataset.index;
       const path = e.currentTarget.dataset.path;
       const data = this.data.list[idx];
+      this.setData({
+        selected: idx
+      })
       if(data.isSpecial){
 
       }
@@ -70,17 +73,16 @@ Component({
           success: (res) => {
             console.log("用于展示用户资料:",res);
             APP.globalData.userInfo = res.userInfo,
+            APP.globalData.refreshUserInfo(res.userInfo);
             // get useerinfo
-            this.setData({
-              hasUserInfo: true
+            wx.switchTab({
+              url: path,
             })
           }
         })
       }
-      this.setData({
-        selected: idx
-      })
-      if (this.data.list[idx].isSpecial){
+   
+      else if(this.data.list[idx].isSpecial){
         wx.navigateTo({
           url: path,
         })

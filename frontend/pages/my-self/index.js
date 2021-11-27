@@ -18,7 +18,7 @@ Page({
         name: '压缩(高质量)',
       },
       {
-        name: '压缩(代质量)',
+        name: '压缩(低质量)',
       },
     ],
   },
@@ -44,8 +44,6 @@ Page({
    */
   onLoad: function (options) {
     console.log("onLoad getUserProfile:",);
-  
-    // this.getUserProfile();
   },
 
   getUserProfile(e) {

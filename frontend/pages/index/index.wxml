@@ -6,7 +6,26 @@
   </view>
   <view class="sub-title">——顶级智能扫描全球引领者</view>
     <view class="main-body">
+
      <!-- 1 -->
+     <view class="main-item main-item-T " bindtap="pictureToText">
+        <view class="main-item-img">
+          <view class="main-item-img-content main-item-img-content-T">
+          </view>
+        </view>
+        <view class="main-item-txt">
+          <view class="main-item-txt-title">
+            图片转文字
+          </view>
+          <view class="main-item-txt-sub-title">
+            图片转txt/word 、支持复制分享
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+     <!-- 2 -->
       <view class="main-item" bindtap="showFileSelectPopup">
         <view class="main-item-img">
           <view class="main-item-img-content">
@@ -21,7 +40,7 @@
           </view>
         </view>
       </view>
-     <!-- 2 -->
+     <!-- 3 -->
       <view class="main-item main-item-excel">
         <view class="main-item-img">
           <view class="main-item-img-content main-item-img-content-excel">
@@ -37,22 +56,7 @@
         </view>
       </view>
 
-   <!-- 3 -->
-      <view class="main-item main-item-T " bindtap="pictureToText">
-        <view class="main-item-img">
-          <view class="main-item-img-content main-item-img-content-T">
-          </view>
-        </view>
-        <view class="main-item-txt">
-          <view class="main-item-txt-title">
-            图片转文字
-          </view>
-          <view class="main-item-txt-sub-title">
-            图片转txt/word 、支持复制分享
-          </view>
-        </view>
-      </view>
-    </view>
+  
 
 
       <!-- 4 -->
