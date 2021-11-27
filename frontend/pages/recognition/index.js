@@ -1,8 +1,7 @@
 // pages/recognition/index.js
 import { urlTobase64, getEnv, localFileTobase64,copyText } from '../../utils/common';
 import { postData } from '../../utils/http';
-import { getOcrUrl } from "../../services/baidu/ocr";
-
+import BaiDuOcrService from "../../services/baidu/ocr";
 Page({
   /**
    * Page initial data
@@ -35,65 +34,24 @@ Page({
     this.seeSingleResult(clickItem);
   },
   async startRun(){
-    console.log(1234567890);
     const handledImgs = this.data.images;
-    let count = 0;
     const that = this;
     handledImgs.map(async (item,index)=>{
         const clone = Object.assign({},item,{status:1});
-        console.log("clone:",clone);
-        // this.data.images.splice(index,1,clone);
-        const isPrd = getEnv()==='pro';
-        let base64='';
-        if(isPrd){
-          base64 = await localFileTobase64(item.url,{header:false});
-        }
-        else{
-          base64 = await urlTobase64(item.url,{header:false})
-        }
-          // const base64 = await urlTobase64(item.url,{header:false});
-        // const bdurlcope = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.e5c628434b36f9ad46bf27ef65913e8d.2592000.1640329068.282335-25222063';
-        const bdurl = getOcrUrl();
-        // console.log("bdurl:",bdurl);
-        // console.log("bdurl:",bdurlcope);
-        // console.log("bdurl:",bdurlcope === bdurl);
-
-        
-        // https://cloud.baidu.com/doc/OCR/s/Ck3h7y2ia
-        // Content-Type为application/x-www-form-urlencoded
-        const ret = await postData(bdurl,{image:base64},{headers:{'Content-Type':"application/x-www-form-urlencoded"}});
+        const ret = await BaiDuOcrService.generalByImg(item.url);
         if(!ret.error_code&&ret.words_result_num){
           item.status = 2;
-          item.base64 = base64;
           item.rego = ret;
         }
         else if(!ret.words_result_num){
           item.status = 9;
-          // item.base64 = base64;
         }
         else{
           item.status = 3;
-          // item.base64 = base64;
         }
-        console.log("item:",item);
-        console.log("ret:",ret);
-
-        
         that.setData({images:that.data.images.map(item=>item)});
-        // return {...item,base64,rego:ret};
-        // const newImages = this.data.images.map(item=>{
-        //   // https://aip.baidubce.com/rest/2.0/ocr/v1/general?access_token=24.
-        //   return {...item,base64,rego:ret,status:2};
-        // });
-        // console.log("newImages:",newImages);
-        // this.setData({images:newImages});
-        // count = count+1;
-        // if(count===this.data.images.length){
-        //   this.setData({all:true});
-        // }
     });
-    // console.log("wills:",wills);
-    // this.setData({images:wills});
+
   },
 
   seeSingleResult(item){
@@ -138,9 +96,16 @@ Page({
 
   onTabbarChange(e){
     const action = e.detail;
-    const images = this.data.imagses
+    // const images = this.data.imagses
+    console.log("action:",action,action === 'share');
     if(action === 'copy'){
       this.coypAll();
+    }
+    else if(action === 'share'){
+      wx.showShareMenu({
+        withShareTicket: true,
+        menus: ['shareAppMessage', 'shareTimeline']
+      })
     }
   },
   /**

@@ -44,6 +44,11 @@ function getEnv() {
   }
 }
 
+function isRealDevice(){
+  let res = wx.getSystemInfoSync();
+  return !!res.host;
+}
+
 function copyText(data) {
   wx.setClipboardData({
     data,
@@ -60,5 +65,5 @@ function copyText(data) {
 }
 
 module.exports={
-  isPromse,urlTobase64,getEnv,localFileTobase64,copyText
+  isPromse,urlTobase64,getEnv,localFileTobase64,copyText,isRealDevice
 }

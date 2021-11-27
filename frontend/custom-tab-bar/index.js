@@ -38,7 +38,7 @@ Component({
         "text": "首页"
       },
       {
-        pagePath: "/pages/bar/bless/bless",
+        pagePath: "/pages/camera/index",
         iconPath: "/images/nav/camera_circle_fill.svg",
         selectedIconPath: "/images/nav/camera_circle_fill.svg",
         text: "",
