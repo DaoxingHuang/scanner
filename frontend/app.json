@@ -43,7 +43,8 @@
     "pages/camera/index",
     "pages/image-list/index",
     "pages/recognition/index",
-    "pages/word-editor/index"
+    "pages/word-editor/index",
+    "pages/my-self/index"
   ],
   "subpackages": [
     {
@@ -105,7 +106,7 @@
         "text": "优惠券"
       },
       {
-        "pagePath": "pages/my/index",
+        "pagePath": "pages/my-self/index",
         "iconPath": "images/nav/my-off.png",
         "selectedIconPath": "images/nav/my-on.png",
         "text": "我的"

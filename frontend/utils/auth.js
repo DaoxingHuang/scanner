@@ -132,6 +132,18 @@ async function authorize() {
   return new Promise((resolve, reject) => {
     wx.login({
       success: function (res) {
+        console.log("success:",res)
+        resolve(res)
+      },
+      fail: err => {
+        reject(err)
+      }
+    })
+  });
+  return new Promise((resolve, reject) => {
+    wx.login({
+      success: function (res) {
+        debugger;
         const code = res.code
         let referrer = '' // 推荐人
         let referrer_storge = wx.getStorageSync('referrer');

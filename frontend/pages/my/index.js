@@ -21,29 +21,43 @@ Page({
     userInfoStatus: 0 // 0 未读取 1 没有详细信息 2 有详细信息
   },
 	onLoad() {
-    this.readConfigVal()
-    // 补偿写法
-    getApp().configLoadOK = () => {
-      this.readConfigVal()
-    }
+    // this.readConfigVal()
+    // // 补偿写法
+    // getApp().configLoadOK = () => {
+    //   this.readConfigVal()
+    // }
 	},
   onShow() {
     const _this = this
     AUTH.checkHasLogined().then(isLogined => {
+      console.log("AUTH.checkHasLogined():",isLogined);
       if (isLogined) {
         _this.getUserApiInfo();
         _this.getUserAmount();
-        _this.orderStatistics();
-        _this.cardMyList();
-        TOOLS.showTabBarBadge();
+        // _this.orderStatistics();
+        // _this.cardMyList();
+        // TOOLS.showTabBarBadge();
       } else {
         AUTH.authorize().then(res => {
-          AUTH.bindSeller()
-          _this.getUserApiInfo();
-          _this.getUserAmount();
-          _this.orderStatistics();
-          _this.cardMyList();
-          TOOLS.showTabBarBadge();
+          console.log("AUTH.authorize():",res);
+          wx.getUserInfo({
+            success: function(res) {
+              const userInfo = res.userInfo;
+              console.log("userInfo:",userInfo);
+              // var nickName = userInfo.nickName
+              // var avatarUrl = userInfo.avatarUrl
+              // var gender = userInfo.gender //性别 0：未知、1：男、2：女
+              // var province = userInfo.province
+              // var city = userInfo.city
+              // var country = userInfo.country
+            }
+          })
+          // AUTH.bindSeller()
+          // _this.getUserApiInfo();
+          // _this.getUserAmount();
+          // _this.orderStatistics();
+          // _this.cardMyList();
+          // TOOLS.showTabBarBadge();
         })
       }
     })

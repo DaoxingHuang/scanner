@@ -1,0 +1,62 @@
+
+    <view class="container">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <view  class="container container-name">
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <view class="container">
+          <view class="title" >官方账号绑定:</view>
+          <button class="phone-number" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">查看账号</button>
+
+        </view>
+      </view>
+    </view>
+    <van-cell-group >
+      <van-cell value=" "  bind:click="addFavorite"  is-link>
+        <view slot="title" class="cell-slot-container">
+          <view class="my-icon my-icon-star"></view>
+          <view class="van-cell-text">收藏小程序</view>
+        </view>
+      </van-cell>
+
+      <van-cell value="{{imgway}}" bind:click="selectImageWay" is-link>
+        <view slot="title" class="cell-slot-container cell-slot-container-normal">
+          <view class="my-icon my-icon-img"></view>
+          <view class="van-cell-text">图片处理模式</view>
+        </view>
+      </van-cell>
+
+      <van-cell value=" " is-link>
+        <view slot="title" class="cell-slot-container">
+          <view class="my-icon my-icon-service"></view>
+          <view class="van-cell-text">
+            <button class="van-cell-text van-cell-text-btn" open-type="contact">联系客服</button>
+          </view>
+        </view>
+      </van-cell>
+
+      <van-cell value=" " is-link>
+        <view slot="title" class="cell-slot-container">
+          <view class="my-icon my-icon-help"></view>
+          <view class="van-cell-text">使用帮助</view>
+        </view>
+      </van-cell>
+
+
+      <van-cell value=" " is-link>
+        <view slot="title" class="cell-slot-container ">
+          <view class="my-icon my-icon-feedback"></view>
+          <view class="van-cell-text">
+            <button class="van-cell-text van-cell-text-btn" open-type="feedback">用户反馈</button></view>
+        </view>
+      </van-cell>
+  </van-cell-group>
+
+<view class="user-agreement"><a class="user-agreement-item">用户协议</a><span>与</span><a class="user-agreement-item">隐私政策</a></view>
+
+<van-action-sheet
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  z-index="99999999"
+  bind:select="onSelect"
+/>

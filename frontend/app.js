@@ -81,6 +81,7 @@ App({
 
   globalData: {
     isConnected: true,
+    userInfo:null,
     // sdkAppID: CONFIG.sdkAppID
   }
 })

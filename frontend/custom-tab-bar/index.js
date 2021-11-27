@@ -21,6 +21,9 @@
 
 //   }
 // })
+
+const APP = getApp();
+
 Component({
   data: {
     selected: 0,
@@ -42,10 +45,11 @@ Component({
         isSpecial: true
       },
       {
-        "pagePath": "/pages/my/index",
+        "pagePath": "/pages/my-self/index",
         "iconPath": "/images/nav/my-off.png",
         "selectedIconPath": "/images/nav/my-on.png",
-        "text": "我的"
+        "text": "我的",
+        isMy:true,
       }
     ]
   },
@@ -56,6 +60,23 @@ Component({
       console.log(e.currentTarget.dataset);
       const idx = e.currentTarget.dataset.index;
       const path = e.currentTarget.dataset.path;
+      const data = this.data.list[idx];
+      if(data.isSpecial){
+
+      }
+      else if(data.isMy&&!APP.globalData.userInfo){
+        wx.getUserProfile({
+          desc: '用于展示用户资料', 
+          success: (res) => {
+            console.log("用于展示用户资料:",res);
+            APP.globalData.userInfo = res.userInfo,
+            // get useerinfo
+            this.setData({
+              hasUserInfo: true
+            })
+          }
+        })
+      }
       this.setData({
         selected: idx
       })

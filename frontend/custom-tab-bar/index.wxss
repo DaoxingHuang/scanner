@@ -31,7 +31,7 @@
 }
 .txt{
   margin-top: 5rpx;
-  font-size: 30rpx;
+  font-size: 25rpx;
   color: #aaaaaa;
 }
 .fontWeight{
