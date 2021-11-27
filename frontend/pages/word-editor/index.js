@@ -15,8 +15,9 @@ Page({
     height:240,
     rects:[],
     top:app.globalData.screenWidth/2+100,
-    defaultH:app.globalData.screenWidth/2+90,
-    longText:''
+    defaultH:app.globalData.screenWidth/2+70,
+    longText:'',
+    selectAll:true,
   },
 
   /**
@@ -40,15 +41,43 @@ Page({
   },
 
   onTabbarChange(e){
+    console.log(333);
     if(e.detail === "copy"){
       copyText(this.data.longText);
     }
+    else if(e.detail === "selectAll"){
+      console.log("this.data.selectAll:",this.data.selectAll);
+      this.data.rects.forEach(item=>item.select=!this.data.selectAll);
+      const words = (this.data.rects||[]).filter(item=>item.select).map(item=>item.word);
+      const longText = words.join('\n');
+      console.log("longText:",longText);
+      this.editorCtx.clear();
+      this.editorCtx.insertText({
+        text: longText
+      })
+      // this.setData({rate,height:actualHeight/rate,rects,longText});
+      this.setData({rects:this.data.rects,longText,selectAll:!this.data.selectAll});
+    }
   },
   reacClick(e){
-    console.log("reacClick:");
+    // this item is clone body ,can not change it direct;
+    const item = e.currentTarget.dataset.item;
+    // item.select = !item.select;
+    this.data.rects[item.index].select = !this.data.rects[item.index].select;
+    console.log(this.data.rects);
+    const selectRects = this.data.rects.filter(item=>item.select);
+    const words = (selectRects||[]).map(item=>item.word);
+    const longText = words.join('\n');
+    this.editorCtx.clear();
+    this.editorCtx.insertText({
+      text: longText
+    })
+    // this.setData({rate,height:actualHeight/rate,rects,longText});
+    this.setData({rects:this.data.rects,longText});
   },
+
   bindchange(event){
-    this.setData({top:event.detail.y+10});
+    this.setData({top:event.detail.y+30});
     // event.detail = {x, y, source}
   },
   bindTextAreaBlur: function(e) {
@@ -56,6 +85,19 @@ Page({
       longText:e.detail.value
     }) 
   }, 
+
+  onEditorReady() {
+    console.log("onEditorReady:");
+    const that = this
+    wx.createSelectorQuery().select('#editor').context(function (res) {
+      that.editorCtx = res.context;
+      console.log("onEditorReady:",that.data.longText);
+
+      // this.editorCtx.insertText({
+      //   text: formatDate
+      // })
+    }).exec()
+  },
   onImgLoad(e){
     console.log("img:",e);
     console.log('rects:');
@@ -70,13 +112,17 @@ Page({
     const rego = this.data.item.rego;
     const words_result = rego.words_result|| [];
     const words = [];
-    const rects = words_result.map(item=>{
-    const location = item.location;
-    words.push(`${item.words.trim()}`);
-    return {height:location.height/rate,left:location.left/rate,top:location.top/rate,width:location.width/rate}
+    const rects = words_result.map((item,index)=>{
+      const location = item.location;
+      const word = item.words.trim();
+      words.push(word);
+      return {height:location.height/rate,left:location.left/rate,top:location.top/rate,width:location.width/rate, index, select:true ,word,}
     });
     console.log('rects:',rects);
     const longText = words.join('\n');
+     this.editorCtx.insertText({
+        text: longText
+      })
     this.setData({rate,height:actualHeight/rate,rects,longText});
   },
 

@@ -15,21 +15,22 @@
     <van-image class="item" bind:load="onImgLoad" width="100vw" height="{{height}}" fit='cover' data-img="{{item.url}}"  src="{{item.url}}" />
     <view class="text-mask">
       <!-- {top: 49, left: 784, width: 82, height: 32} -->
-      <view wx:for="{{rects}}" wx:key="index" bindtap="reacClick" style="{{'position: absolute;top:'+item.top+'px;left:'+item.left+'px;width:'+item.width+'px;height:'+item.height+'px;opacity:0.3;border: red solid 4rpx;background:#1989fa'}}"></view>
+      <view data-item="{{item}}" wx:for="{{rects}}" wx:key="index" bindtap="reacClick" style="{{'position: absolute;top:'+(item.top-2)+'px;left:'+(item.left-2)+'px;width:'+item.width+'px;height:'+item.height+'px;opacity:0.3;border: red solid 4rpx;background:'+(item.select?'#1989fa':'')}}"></view>
       <!-- rects -->
     </view>
   </view>
 
     <view class="text-area" style="{{'top:'+ top+'px'}}">
-      <textarea value="{{longText}}" bindblur="bindTextAreaBlur" style="height: 100%" />
+      <editor id="editor" bindready="onEditorReady" value="{{longText}}" bindblur="bindTextAreaBlur" style="height: 100%" ></editor>
     </view>
     <movable-view y="{{defaultH}}" damping="5000" class="dragger-movable-view" direction="vertical" bindchange="bindchange">
-      <view class="dragger-item">
-    </view>
+      <view class="dragger-item"></view>
+      <view class="dragger-item-text">累计包含{{longText.length}}个字符</view>
     </movable-view>
   <van-tabbar  active="{{ active }}" bind:change="onTabbarChange">
       <!-- <van-icon name="description" /> -->
       <van-tabbar-item name="copy" icon="description">复制</van-tabbar-item>
+      <van-tabbar-item name="selectAll" icon="description">{{ !selectAll?"全选":"取消全选" }}</van-tabbar-item>
       <!-- <van-icon name="share-o" /> -->
       <!-- <van-tabbar-item icon="search" dot>查看识别结果</van-tabbar-item> -->
       <van-tabbar-item icon="share-o" >导出</van-tabbar-item>
