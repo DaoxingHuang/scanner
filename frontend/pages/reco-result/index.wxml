@@ -1,5 +1,6 @@
 <!--pages/reco-result/index.wxml-->
 <view class="talbe-container">
+  <view class="summary">简述:共识别表格{{result.length}}个</view>
   <view class="table" wx:for="{{result}}" wx:key="index">
     <view class="tr" wx:for-item="tr" wx:for="{{item.fakeHeadersRet}}" wx:key="index">
         <view class="th" style="{{'width:'+span+'%'}}" wx:for-item="th" wx:for="{{tr}}">{{th.words}}</view>

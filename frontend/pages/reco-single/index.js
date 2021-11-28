@@ -33,6 +33,13 @@ Page({
     })
     try{
       const ret = await BaiDuOcrService.formByImg(this.data.url);
+      if(ret.error_code){
+        wx.showToast({
+          icon:"error",
+          title: '识别失败',
+        })
+        return;
+      }
       wx.navigateTo({
         url: '/pages/reco-result/index?url='+this.data.url,
         events: {

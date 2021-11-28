@@ -84,3 +84,9 @@
 .van-cell-text-btn::after{
   border:none;
 }
+
+.summary{
+  font-size: 1.1rem;
+  margin: 10rpx 0;
+  color: green;
+}
