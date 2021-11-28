@@ -44,7 +44,9 @@
     "pages/image-list/index",
     "pages/recognition/index",
     "pages/word-editor/index",
-    "pages/my-self/index"
+    "pages/my-self/index",
+    "pages/reco-single/index",
+    "pages/reco-result/index"
   ],
   "subpackages": [
     {

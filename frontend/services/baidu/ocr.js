@@ -26,7 +26,6 @@ class BaiDuOcr {
     } else {
       base64 = await urlTobase64(url, { header: false })
     }
-    console.log('base64:',base64);
     return base64;
   }
 
@@ -42,6 +41,20 @@ class BaiDuOcr {
     });
     return ret;
   };
+  // https://cloud.baidu.com/doc/OCR/s/ik3h7xyxf
+  async formByImg(imgUrl) {
+    const url = this._getBaiDuUrl('form');
+    let base64 = await this._getImageBase64ByUrl(imgUrl);
+    const ret = await postData(url, {
+      image: base64
+    }, {
+      headers: {
+        'Content-Type': "application/x-www-form-urlencoded"
+      }
+    });
+    return ret;
+  };
+  // https://aip.baidubce.com/rest/2.0/ocr/v1/form
 
 }
 

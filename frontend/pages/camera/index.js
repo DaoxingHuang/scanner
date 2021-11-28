@@ -1,19 +1,23 @@
+import { CameraActionType } from "../../utils/type";
 Page({
   data:{
-    active:1,
+    active:CameraActionType.PictureKownWords.index,
+    cameraActionType:CameraActionType,
     colors:["12","3","4"],
     checked:true,
     images:[],
     curSrc:'',
     showFileSelect:false,
     selectActions: [
-      { name: '拍照',type:"device",sizeType:['original', 'compressed'],sourceType:['camera']},
+      // { name: '拍照',type:"device",sizeType:['original', 'compressed'],sourceType:['camera']},
       { name: '从相册中选择',type:"device", sizeType:['original', 'compressed'],sourceType:['album']},
       { name: '导入联系人图片',type:"message"},
     ],
   },
-  onLoad() {
-    this.ctx = wx.createCameraContext()
+  onLoad(options) {
+    this.ctx = wx.createCameraContext();
+    console.log("Camare:",options.active);
+    this.setData({active:parseInt(options.active||1)});
   },     
 
   onSwitchChange(e){
@@ -78,15 +82,8 @@ Page({
     this.ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-       const clone = Array.from(this.data.images);
-       const url = res.tempImagePath;
-       if(this.data.images.length>=6){
-          wx.showToast({
-            title: '最多6张图片'
-          });
-         return;
-       }
-       this.setImageList(url);
+      const url = res.tempImagePath;
+       this.actionRun(url);     
       }
     })
   },
@@ -103,14 +100,9 @@ Page({
 
   selectFileAction:function(event){
     const detail=  event.detail;
-    // sizeType=['original', 'compressed'],sourceType=['camera']
-    // const action = detail.action();
-
     detail.type === "device" && this.chooseImage(detail.sizeType, detail.sourceType);
     detail.type === "message" && this.chooseMessageFile(detail.sizeType, detail.sourceType);
-
     console.log("selectFileAction:",detail);
-
   },
    
   chooseMessageFile:function(e){
@@ -119,15 +111,7 @@ Page({
       count: 1,
       type: 'image',
       success (res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-      console.log("res:",res);
-      if(that.data.images.length>=6){
-        wx.showToast({
-          title: '最多6张图片'
-        });
-       return;
-      }
-      that.setImageList(res.tempFiles[0].path);
+        that.actionRun(res.tempFiles[0].path);     
       }
     })
   },
@@ -140,29 +124,44 @@ Page({
       sizeType,  //可选择原图或压缩后的图片
       sourceType, //可选择性开放访问相册、相机
       success: res => {
-        if(that.data.images.length>=6){
-          wx.showToast({
-            title: '最多6张图片'
-          });
-         return;
-        }
-        this.setImageList(res.tempFilePaths[0]);
-        // "pages/cropper/cropper"
-        // wx.redirectTo({
-        //   url: '/pages/cropper/cropper?url='+ res.tempFilePaths[0],
-        // })
-        // // ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
-        // // ctx.draw();
-        // // wx.redirectTo({
-        // //   url: '/pages/goods/list?name=' + keywords,
-        // // })
-        console.log(res);
+        this.actionRun(res.tempFilePaths[0]);
       }
     });
   },
 
+  actionRun:function(url) {
+    if(this.data.active === CameraActionType.PictureKownWords.index){
+      this.pictureKownWords(url);
+    }
+    else if(this.data.active === CameraActionType.TableKownExcel.index){
+      this.tableKownExcel(url);
+    }
+  },
+
+  // export const CameraActionType={
+  //   TableKownExcel:{index:0,name:'表格识字'},
+  //   PictureKownWords:{index:1,name:'拍图识字'},
+  //   PictureToOfficeWord:{index:2,name:'拍图转word'},
+  // }
+  tableKownExcel:function(url){
+    wx.navigateTo({
+      url: '/pages/reco-single/index?url='+url,
+    })
+  },
+
+  pictureKownWords:function(url){
+    if(this.data.images.length>=6){
+      wx.showToast({
+        title: '最多6张图片'
+      });
+     return;
+    }
+    this.setImageList(url);
+  },
+
   onTabBarChange:function(e){
-    this.setData({active:e.detail})
+    console.log(e,e.detail);
+    this.setData({active:e.detail, images: [],curSrc:''});
   },
   startRecord() {
     this.ctx.startRecord({
@@ -171,6 +170,8 @@ Page({
       }
     })
   },
+
+
   stopRecord() {
     this.ctx.stopRecord({
       success: (res) => {

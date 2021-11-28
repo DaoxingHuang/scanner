@@ -24,24 +24,8 @@
       </view>
     </view>
 
-
      <!-- 2 -->
-      <view class="main-item" bindtap="showFileSelectPopup">
-        <view class="main-item-img">
-          <view class="main-item-img-content">
-          </view>
-        </view>
-        <view class="main-item-txt">
-          <view class="main-item-txt-title">
-            手机扫描仪
-          </view>
-          <view class="main-item-txt-sub-title">
-            图片转PDF、纸质文件转高清电子文档
-          </view>
-        </view>
-      </view>
-     <!-- 3 -->
-      <view class="main-item main-item-excel">
+     <view class="main-item main-item-excel" bindtap="pictureToExcel">
         <view class="main-item-img">
           <view class="main-item-img-content main-item-img-content-excel">
           </view>
@@ -56,7 +40,22 @@
         </view>
       </view>
 
-  
+     <!-- 3 -->
+      <view class="main-item" bindtap="showFileSelectPopup">
+        <view class="main-item-img">
+          <view class="main-item-img-content">
+          </view>
+        </view>
+        <view class="main-item-txt">
+          <view class="main-item-txt-title">
+            手机扫描仪
+          </view>
+          <view class="main-item-txt-sub-title">
+            图片转PDF、纸质文件转高清电子文档
+          </view>
+        </view>
+      </view>
+
 
 
       <!-- 4 -->

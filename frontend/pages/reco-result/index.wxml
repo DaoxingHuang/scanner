@@ -1,0 +1,31 @@
+<!--pages/reco-result/index.wxml-->
+<view class="talbe-container">
+  <view class="table" wx:for="{{result}}" wx:key="index">
+    <view class="tr" wx:for-item="tr" wx:for="{{item.fakeHeadersRet}}" wx:key="index">
+        <view class="th" style="{{'width:'+span+'%'}}" wx:for-item="th" wx:for="{{tr}}">{{th.words}}</view>
+    </view>
+  <!-- <van-row wx:for="{{trs}}" wx:for-item="tr" wx:key="inde">
+    <van-col span="{{span}}" wx:for="{{tr}}" wx:for-item="td" wx:key="index">{{td.words}}</van-col>
+  </van-row> -->
+  
+    <block wx:for="{{item.bodyCollect}}" wx:for-item="tr" wx:key="index">
+      <view class="tr bg-g" >
+          <view wx:for="{{tr}}" style="{{'width:'+span+'%'}}" wx:for-item="td" wx:key="{{index}}" class="td">{{td.words}}</view>
+      </view>
+    </block>
+
+    <block wx:for="{{item.footerCollect}}" wx:for-item="tr" wx:key="index">
+      <view class="tr bg-g" >
+          <view wx:for="{{tr}}" style="{{'width:'+span+'%'}}" wx:for-item="td" wx:key="{{index}}" class="td">{{td.words}}</view>
+      </view>
+    </block>
+  </view>
+</view>
+
+
+<van-tabbar  active="{{ active }}" bind:change="onTabbarChange">
+      <van-tabbar-item name="copy" icon="description">复制</van-tabbar-item>
+      <van-tabbar-item>   <button class="van-cell-text-btn" open-type="share">
+          <cover-image src="../../images/share/share.png" class="icons"></cover-image>
+        </button></van-tabbar-item>
+    </van-tabbar>

@@ -1,0 +1,7 @@
+<!--pages/reco-single/index.wxml-->
+<view class="image-container">
+    <van-image class="item" bind:load="onImgLoad" width="100%" height="100vh" fit='contain' data-img="{{url}}"  src="{{url}}" />
+</view>
+<view class="image-footer">
+    <van-button type="primary" bind:click="gotToRecog" custom-class="shibie-custom-class" block >开始识别</van-button>
+  </view>

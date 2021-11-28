@@ -1,3 +1,4 @@
+
 <view class="container">
   <view class="camera-container">
     <view class="line line-hor line-hor-33"></view>
@@ -14,9 +15,7 @@
       <van-radio wx:for="{{colors}}" custom-class="radio-custom-class" icon-class="radio-icon-class"  style="--aak-color:{{ item }}"   name="{{item}}"  label-class="label-class-item" wx:key="index"  checked-color="{{item}}"></van-radio>
       </van-radio-group> -->
       <van-tabbar  fixed="{{false}}"  active="{{ active }}" active-color="#07c160" inactive-color="#000" bind:change="onTabBarChange">
-        <van-tabbar-item >表格识字</van-tabbar-item>
-        <van-tabbar-item >拍图识字</van-tabbar-item>
-        <van-tabbar-item >拍图转word</van-tabbar-item>
+        <van-tabbar-item data-name="{{item.name}}" wx:key="index" wx:for="{{cameraActionType}}">{{item.name}}</van-tabbar-item>
       </van-tabbar>
     </view>
 

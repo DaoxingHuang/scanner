@@ -67,11 +67,9 @@ Component({
       console.log("selected:",this.data.selected);
       console.log(e.currentTarget.dataset);
       const idx = e.currentTarget.dataset.index;
-
       if(this.data.selected === idx){
         return;
       }
-
       const path = e.currentTarget.dataset.path;
       const data = this.data.list[idx];
       console.log("idx:",idx)

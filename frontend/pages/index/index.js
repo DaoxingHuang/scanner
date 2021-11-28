@@ -77,21 +77,15 @@ Page({
     wx.redirectTo({
       url: '/pages/camera/index',
     });
-    // const ctx = wx.createCameraContext();
-    // console.log("createCameraContext:",this.ctx)
-
-    // this.ctx.takePhoto({
-    //   quality: 'high',
-    //   success: (res) => {
-    //     this.setData({
-    //       src: res.tempImagePath
-    //     })
-    //   },
-    //   fail:(res) => {
-    //     console.log("fail:",res)
-    //   },
-    // })
   },
+  
+  pictureToExcel(e){
+    console.log("pictureToText:")
+    wx.redirectTo({
+      url: '/pages/camera/index?active=0',
+    });
+  },
+  
 
   // <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
 
