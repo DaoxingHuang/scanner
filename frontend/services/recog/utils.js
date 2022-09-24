@@ -8,3 +8,15 @@ export const b64EncodeUnicode = (str) => {
                 })
             );
 }
+
+// recog_fapiao 数据转换成 ocr_general 数据
+export const transFapiaoData = (data) => {
+    const result = data;
+    return result
+}
+
+// recog_doc 数据转换成 ocr_form 数据
+export const transDocData = (data) => {
+    const result = data
+    return result
+}
