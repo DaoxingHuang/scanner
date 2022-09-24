@@ -12,16 +12,16 @@ export const b64EncodeUnicode = (str) => {
 // recog_fapiao 数据转换成 ocr_general 数据
 export const transFapiaoData = (data = []) => {
     const result = data && data[0] || {};
-    const { FreeTexts=[] } = result
-    const words_result_num = FreeTexts.length
-    const words_result = FreeTexts.map(item => {
+    const { StructTexts=[] } = result
+    const words_result_num = StructTexts.length
+    const words_result = StructTexts.map(item => {
         const {
-            Text,
-            Position
+            ItemText,
+            ItemPosition
         } = item
-        const [x1, y1, x2, y2] = Position
+        const [x1, y1, x2, y2] = ItemPosition
         return {
-            words: Text,
+            words: ItemText,
             location: {
                 top: y1,
                 left: x1,

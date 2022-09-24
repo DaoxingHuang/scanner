@@ -1,5 +1,5 @@
 import Config from './config'
-import { b64EncodeUnicode, /* transFapiaoData, transDocData */ } from './utils'
+import { b64EncodeUnicode, transFapiaoData, /* transDocData */ } from './utils'
 
 
 // 小程序uploadFile封装
@@ -28,7 +28,18 @@ const uploadFile = ({
                 console.log('--->>>>>>>>recogFapiao success = ', res)
                 const { statusCode, data } = res
                 if(statusCode === 200) {
-                    resolve(res)
+                    let resData = data
+                    try {
+                        resData = JSON.parse(data)
+                    } catch(e) {
+                        resData = data
+                    }
+                    if(resData.ResultCode == 200) {
+                        const result = transFapiaoData(resData.Results)
+                        resolve(result)
+                    } else {
+                        reject(new Error(resData.ResultCode))
+                    }
                 } else {
                     reject(new Error(data))
                 }
@@ -42,7 +53,7 @@ const uploadFile = ({
 }
 
 // 票据识别接口
-export const recogFapiao = (filePath) => {
+export const recogFapiao = async (filePath) => {
     return new Promise((resolve, reject) => {
         // 请求路径
         const url = `${Config.apiDomain}/api/recog_fapiao`

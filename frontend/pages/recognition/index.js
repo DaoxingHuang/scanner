@@ -1,7 +1,8 @@
 // pages/recognition/index.js
 import { urlTobase64, getEnv, localFileTobase64,copyText } from '../../utils/common';
 import { postData } from '../../utils/http';
-import BaiDuOcrService from "../../services/baidu/ocr";
+// import BaiDuOcrService from "../../services/baidu/ocr";
+import { recogFapiao } from '../../services/recog/index'
 Page({
   /**
    * Page initial data
@@ -38,7 +39,8 @@ Page({
     const that = this;
     handledImgs.map(async (item,index)=>{
         const clone = Object.assign({},item,{status:1});
-        const ret = await BaiDuOcrService.generalByImg(item.url);
+        const ret = await recogFapiao(item.url)
+        // const ret = await BaiDuOcrService.generalByImg(item.url);
         if(!ret.error_code&&ret.words_result_num){
           item.status = 2;
           item.rego = ret;
