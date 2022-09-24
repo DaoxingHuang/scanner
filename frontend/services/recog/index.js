@@ -1,5 +1,5 @@
 import Config from './config'
-import { b64EncodeUnicode } from './utils'
+import { b64EncodeUnicode, /* transFapiaoData, transDocData */ } from './utils'
 
 
 // 小程序uploadFile封装
