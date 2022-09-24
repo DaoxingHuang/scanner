@@ -41,7 +41,7 @@ export const transDocData = (data) => {
     const result = data && data[0] || {};
     const { TableTexts=[] } = result
     const form_num = TableTexts.length
-    const forms = TableTexts.map(item => {
+    const forms_result = TableTexts.map(item => {
         const { content=[] } = item
         const body = content.map(conItem => {
             const {
@@ -52,13 +52,13 @@ export const transDocData = (data) => {
                 ItemColDXEnd //结束行号
             } = conItem
             return {
-                column: [ItemRowIDX, ItemRowIDXEnd],
-                row: [ItemColDX, ItemColDXEnd],
+                column: ItemColDX, // [ItemColDX, ItemColDXEnd],
+                row: ItemRowIDX, // [ItemRowIDX, ItemRowIDXEnd],
                 rect: {
                     left: 0,
                     top: 0,
                 },
-                word: ItemText
+                words: ItemText
             }
         })
 
@@ -71,6 +71,6 @@ export const transDocData = (data) => {
 
     return {
         form_num,
-        forms
+        forms_result
     }
 }

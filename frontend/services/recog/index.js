@@ -1,5 +1,5 @@
 import Config from './config'
-import { b64EncodeUnicode, transFapiaoData, /* transDocData */ } from './utils'
+import { b64EncodeUnicode, transFapiaoData,  transDocData } from './utils'
 
 
 // 小程序uploadFile封装
@@ -35,8 +35,7 @@ const uploadFile = ({
                         resData = data
                     }
                     if(resData.ResultCode == 200) {
-                        const result = transFapiaoData(resData.Results)
-                        resolve(result)
+                        resolve(resData)
                     } else {
                         reject(new Error(resData.ResultCode))
                     }
@@ -70,7 +69,8 @@ export const recogFapiao = async (filePath) => {
             fileName,
             formData
         }).then(res => {
-            resolve(res)
+            const data = transFapiaoData(res.Results)
+            resolve(data)
         }).catch(e => {
             reject(e)
         })
@@ -78,7 +78,7 @@ export const recogFapiao = async (filePath) => {
 }
 
 // 通用文档识别接口
-export const recogDoc = (filePath) => {
+export const recogDoc = async (filePath) => {
     return new Promise((resolve, reject) => {
         // 请求路径
         const url = `${Config.apiDomain}/api/recog_doc`
@@ -90,7 +90,8 @@ export const recogDoc = (filePath) => {
             filePath,
             fileName
         }).then(res => {
-            resolve(res)
+            const data = transDocData(res.Results)
+            resolve(data)
         }).catch(e => {
             reject(e)
         })

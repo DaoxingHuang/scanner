@@ -1,4 +1,5 @@
-import BaiDuOcrService from "../../services/baidu/ocr";
+// import BaiDuOcrService from "../../services/baidu/ocr";
+import { recogDoc } from '../../services/recog/index'
 
 Page({
 
@@ -32,7 +33,8 @@ Page({
       title: '正在识别',
     })
     try{
-      const ret = await BaiDuOcrService.formByImg(this.data.url);
+      const ret = await recogDoc(this.data.url)
+      // const ret = await BaiDuOcrService.formByImg(this.data.url);
       if(ret.error_code){
         wx.showToast({
           icon:"error",
