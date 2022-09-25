@@ -31,6 +31,7 @@ export const transFapiaoData = (data = []) => {
         }
     }) || []
     return {
+        error_code: 0,
         words_result_num,
         words_result: words_result
     }
@@ -70,6 +71,7 @@ export const transDocData = (data) => {
     })
 
     return {
+        error_code: 0,
         form_num,
         forms_result
     }

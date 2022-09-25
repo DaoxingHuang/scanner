@@ -37,15 +37,18 @@ const uploadFile = ({
                     if(resData.ResultCode == 200) {
                         resolve(resData)
                     } else {
-                        reject(new Error(resData.ResultCode))
+                        resolve({error_code: resData.ResultCode, error_msg: ''})
+                        // reject(new Error(resData.ResultCode))
                     }
                 } else {
-                    reject(new Error(data))
+                    resolve({error_code: statusCode, error_msg: ''})
+                    // reject(new Error(data))
                 }
             },
             fail: (err) => {
                 console.log('--->>>>>>>>recogFapiao fail = ', err)
-                reject(err)
+                resolve({error_code: err.code || -1, error_msg: err.message})
+                // reject(err)
             }
         })
     })
